@@ -1,1 +1,18 @@
-<div class="bg-primary">Bootstrap test</div>
+<mat-drawer-container class="mat-sidenav-container" autosize>
+  <mat-drawer #drawer class="mat-sidenav" mode="side">
+    <a href="">Hallo test</a>
+    <a href="">Hallo test</a>
+    <a href="">Hallo test</a>
+    <a href="">Hallo test</a>
+  </mat-drawer>
+  <mat-toolbar color="primary">
+    <button
+      mat-icon-button
+      (click)="drawer.toggle()"
+      aria-label="Icon-button with menu icon"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Simple CRM</span>
+  </mat-toolbar>
+</mat-drawer-container>
