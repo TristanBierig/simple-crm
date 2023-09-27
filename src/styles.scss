@@ -1,6 +1,25 @@
+@use '@angular/material' as mat;
+@use "./app/sidenav-list-theme" as list;
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$pink-palette);
+$my-accent: mat.define-palette(mat.$blue-grey-palette);
+
+$my-theme: mat.define-dark-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+            )));
+
+@include mat.all-component-themes($my-theme);
+@include list.theme($my-theme);
+
 html,
 body {
     height: 100%;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
