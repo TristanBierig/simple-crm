@@ -14,7 +14,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 })
 export class UserComponent implements AfterViewInit {
   users!: User[];
-  displayedColumns: string[] = ['name', 'birthday', 'street', 'city'];
+  displayedColumns: string[] = ['name', 'email', 'birthday', 'street', 'city'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
 
   constructor(

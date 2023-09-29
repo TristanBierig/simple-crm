@@ -23,6 +23,7 @@ export class DialogAddUserComponent {
     let user: User = {
       firstName: this.user.firstName || '',
       lastName: this.user.lastName || '',
+      email: this.user.email || '',
       birthDate: this.birthDate.getTime(),
       street: this.user.street || '',
       zipCode: this.user.zipCode,

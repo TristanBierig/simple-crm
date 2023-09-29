@@ -11,11 +11,11 @@
 
     .sidenav-list {
         li:hover {
-            background-color: mat.get-color-from-palette($accent-palette, 400);
+            background-color: mat.get-color-from-palette($primary-palette, 400);
         }
 
         li:focus {
-            background-color: mat.get-color-from-palette($accent-palette, 500);
+            background-color: mat.get-color-from-palette($primary-palette, 500);
         }
     }
 }
