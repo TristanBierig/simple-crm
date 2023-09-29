@@ -1,0 +1,53 @@
+<!-- <mat-card class="mb-16" *ngFor="let user of getList()">
+  <mat-card-content>{{ user.firstName }}</mat-card-content>
+</mat-card> -->
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let user">
+      {{ user.firstName }}
+      {{ user.lastName }}
+    </td>
+  </ng-container>
+
+  <!-- Birthday Column -->
+  <ng-container matColumnDef="birthday">
+    <th mat-header-cell *matHeaderCellDef>Birthday</th>
+    <td mat-cell *matCellDef="let user">{{ user.birthDate }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="street">
+    <th mat-header-cell *matHeaderCellDef>Street</th>
+    <td mat-cell *matCellDef="let user">{{ user.street }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef>City</th>
+    <td mat-cell *matCellDef="let user">
+      {{ user.zipCode }}
+      {{ user.city }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<button
+  class="user-add-btn"
+  mat-fab
+  (click)="openDialog()"
+  color="primary"
+  matTooltip="Add a new User"
+  aria-label="Icon button with a add icon"
+  [matTooltipPosition]="'above'"
+>
+  <mat-icon>person_add_alt</mat-icon>
+</button>
