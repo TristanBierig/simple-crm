@@ -17,6 +17,8 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MaterialModule } from './custom-modules/material.module';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { MaterialModule } from './custom-modules/material.module';
     DashboardComponent,
     UserComponent,
     DialogAddUserComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,
