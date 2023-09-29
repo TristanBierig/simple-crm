@@ -1,4 +1,6 @@
 import { Injectable, inject } from '@angular/core';
+import { User } from 'src/app/models/user.class';
+import { BehaviorSubject } from 'rxjs';
 import {
   Firestore,
   collection,
@@ -9,10 +11,7 @@ import {
   deleteDoc,
   query,
   limit,
-  orderBy,
-  where,
 } from '@angular/fire/firestore';
-import { User } from 'src/app/models/user.class';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +19,8 @@ import { User } from 'src/app/models/user.class';
 export class UserService {
   firestore: Firestore = inject(Firestore);
   users: User[] = [];
+  private usersSubject = new BehaviorSubject<User[]>([]);
+  users$ = this.usersSubject.asObservable();
 
   unsubUsers;
 
@@ -48,7 +49,8 @@ export class UserService {
       list.forEach((element) => {
         this.users.push(this.setUserObject(element.data(), element.id));
       });
-      console.log('Service data in users: ', this.users);
+
+      this.usersSubject.next(this.users);
     });
   }
 

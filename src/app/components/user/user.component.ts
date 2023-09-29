@@ -1,26 +1,46 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from 'src/app/models/user.class';
-import { UserService } from '../../services/firebase-services/user.service';
+import { UserService } from '../../services/firebase/user.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent {
+export class UserComponent implements AfterViewInit {
   users!: User[];
   displayedColumns: string[] = ['name', 'birthday', 'street', 'city'];
-  dataSource = this.userService.users;
+  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
 
-  constructor(private userService: UserService, public dialog: MatDialog) {
-    console.log('Component Constructor: ', this.dataSource);
-  }
+  constructor(
+    private userService: UserService,
+    public dialog: MatDialog,
+    private _liveAnnouncer: LiveAnnouncer
+  ) {}
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    console.log('Component ngOnInit: ', this.dataSource);
+    this.userService.users$.subscribe((users) => {
+      this.dataSource.data = users;
+    });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  announceSortChange(sortState: Sort) {
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   openDialog(): void {
@@ -29,5 +49,9 @@ export class UserComponent {
 
   getList(): User[] {
     return this.userService.users;
+  }
+
+  rowClicked(row: User) {
+    console.log('row clicked: ', row);
   }
 }
