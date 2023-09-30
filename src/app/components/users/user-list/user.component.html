@@ -82,7 +82,7 @@
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns"
-    (click)="rowClicked(row)"
+    (click)="cacheClickedRowDataInService(row)"
     [routerLink]="'/user/' + row.id"
   ></tr>
 </table>

@@ -1,0 +1,62 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.pin-top-right {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.user-detail-card-main {
+    max-width: 100%;
+
+    .user-detail-header-image {
+        background-image: url('../../../../assets/images/portraits/profile_maria.jpg');
+        background-size: cover;
+        height: 150px;
+        width: 150px;
+    }
+
+    .user-detail-title-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    mat-divider {
+        margin: 16px 0;
+    }
+
+    mat-card-content {
+        position: relative;
+    }
+}
+
+.user-detail-card {
+    width: 50%;
+
+    mat-card-content {
+        display: flex;
+        justify-content: space-around;
+        gap: 16px;
+        margin-top: 16px;
+
+        mat-card-subtitle {
+            margin-bottom: 8px;
+            text-align: center;
+        }
+    }
+}
+
+.user-detail-second-row {
+    display: flex;
+    gap: 16px;
+}

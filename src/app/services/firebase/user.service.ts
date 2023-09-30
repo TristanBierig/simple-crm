@@ -21,6 +21,7 @@ export class UserService {
   users: User[] = [];
   private usersSubject = new BehaviorSubject<User[]>([]);
   users$ = this.usersSubject.asObservable();
+  currentUserDetail!: User;
 
   unsubUsers;
 
@@ -30,6 +31,10 @@ export class UserService {
 
   ngOnDestroy() {
     this.unsubUsers();
+  }
+
+  cacheUserDetail(user: User) {
+    this.currentUserDetail = user;
   }
 
   async addUser(user: User) {

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { User } from 'src/app/models/user.class';
-import { UserService } from '../../services/firebase/user.service';
+import { UserService } from '../../../services/firebase/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

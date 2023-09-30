@@ -1,0 +1,38 @@
+<mat-card-header>
+  <mat-card-title mat-dialog-title>Edit personal info</mat-card-title>
+</mat-card-header>
+
+<div mat-dialog-content>
+  <div class="pt-8">
+    <mat-card-subtitle class="mb-16">Address</mat-card-subtitle>
+    <mat-form-field class="mr-16" appearance="outline">
+      <mat-label>Street + House No.</mat-label>
+      <input [disabled]="loading" [(ngModel)]="user.street" matInput />
+    </mat-form-field>
+
+    <mat-form-field class="mr-16" appearance="outline">
+      <mat-label>Zip Code</mat-label>
+      <input [disabled]="loading" [(ngModel)]="user.zipCode" matInput />
+    </mat-form-field>
+
+    <mat-form-field class="mr-16" appearance="outline">
+      <mat-label>City</mat-label>
+      <input [disabled]="loading" [(ngModel)]="user.city" matInput />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-card-subtitle class="mb-16">Birthday</mat-card-subtitle>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Date of Birth</mat-label>
+      <input [(ngModel)]="user.birthDate" matInput />
+    </mat-form-field>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button>Cancel</button>
+  <button mat-button cdkFocusInitial>Save</button>
+</div>
+
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

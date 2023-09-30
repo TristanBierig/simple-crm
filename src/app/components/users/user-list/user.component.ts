@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from 'src/app/models/user.class';
-import { UserService } from '../../services/firebase/user.service';
+import { UserService } from '../../../services/firebase/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -51,7 +51,7 @@ export class UserComponent implements AfterViewInit {
     return this.userService.users;
   }
 
-  rowClicked(row: User) {
-    console.log('row clicked: ', row);
+  cacheClickedRowDataInService(row: User) {
+    this.userService.cacheUserDetail(row);
   }
 }

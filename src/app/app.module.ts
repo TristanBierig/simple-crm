@@ -6,9 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/user/user.component';
-import { DialogAddUserComponent } from './components/dialog-add-user/dialog-add-user.component';
-
+import { UserComponent } from './components/users/user-list/user.component';
+import { DialogAddUserComponent } from './components/users/dialog-add-user/dialog-add-user.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -17,8 +16,10 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MaterialModule } from './custom-modules/material.module';
-import { UserDetailComponent } from './components/user-detail/user-detail.component';
-
+import { UserDetailComponent } from './components/users/user-detail/user-detail.component';
+import { DialogEditUserComponent } from './components/users/dialog-edit-user/dialog-edit-user.component';
+import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-user-personal/dialog-edit-user-personal.component';
+import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-user-projects/dialog-edit-user-projects.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,9 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     UserComponent,
     DialogAddUserComponent,
     UserDetailComponent,
+    DialogEditUserComponent,
+    DialogEditUserProjectsComponent,
+    DialogEditUserPersonalComponent,
   ],
   imports: [
     BrowserModule,

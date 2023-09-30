@@ -15,6 +15,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatChipsModule } from '@angular/material/chips';
 
 const MaterialComponents = [
   MatInputModule,
@@ -32,6 +35,9 @@ const MaterialComponents = [
   FormsModule,
   MatTableModule,
   MatSortModule,
+  MatDividerModule,
+  MatMenuModule,
+  MatChipsModule,
 ];
 
 @NgModule({
