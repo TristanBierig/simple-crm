@@ -18,6 +18,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatSelectModule} from '@angular/material/select';
 
 const MaterialComponents = [
   MatInputModule,
@@ -38,6 +39,7 @@ const MaterialComponents = [
   MatDividerModule,
   MatMenuModule,
   MatChipsModule,
+  MatSelectModule,
 ];
 
 @NgModule({
