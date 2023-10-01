@@ -26,8 +26,8 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button>Cancel</button>
-  <button mat-button cdkFocusInitial>Save</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="updateInfo()">Save</button>
 </div>
 
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

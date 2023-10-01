@@ -47,6 +47,16 @@ export class UserService {
       });
   }
 
+  async updateUser(user: User) {
+    if (user.id) {
+      let docRef = this.getSingleDocRef('users', user.id);
+
+      await updateDoc(docRef, this.getCleanJson(user)).catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+
   subUsers() {
     const q = query(this.getUsersRef(), limit(100));
     return onSnapshot(q, (list) => {
@@ -77,6 +87,18 @@ export class UserService {
       street: obj.street || '',
       zipCode: obj.zipCode || '',
       city: obj.city || '',
+    };
+  }
+
+  getCleanJson(user: User): {} {
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      birthDate: user.birthDate,
+      street: user.street,
+      zipCode: user.zipCode,
+      city: user.city,
     };
   }
 }

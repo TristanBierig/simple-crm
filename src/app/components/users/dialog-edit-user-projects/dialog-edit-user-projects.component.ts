@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.class';
+import { UserService } from 'src/app/services/firebase/user.service';
 
 @Component({
   selector: 'app-dialog-edit-user-projects',
@@ -10,7 +11,7 @@ import { User } from 'src/app/models/user.class';
 export class DialogEditUserProjectsComponent {
   user: User = new User();
   loading: boolean = false;
-  
+
   assignment!: string;
   projects: any[] = [
     { value: 'daWebsite-0', viewValue: 'DA-Website v3.0' },
@@ -25,7 +26,20 @@ export class DialogEditUserProjectsComponent {
     { value: 'backend-2', viewValue: 'Backend Developer' },
   ];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: User) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: User,
+    private userService: UserService,
+    public dialogRef: MatDialogRef<DialogEditUserProjectsComponent>
+  ) {
     this.user = data;
+  }
+
+  updateInfo() {
+    this.userService.updateUser(this.user);
+    this.closeDialog();
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }
