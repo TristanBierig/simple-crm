@@ -31,10 +31,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   cacheUserId() {
-    this.userId = '';
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.userId = id;
+    let currentId = this.route.snapshot.paramMap.get('id');
+    if (currentId) {
+      this.userId = currentId;
       console.log('New User ID: ', this.userId);
     }
   }
@@ -48,20 +47,20 @@ export class UserDetailComponent implements OnInit {
   }
 
   openMainEdit() {
-    // this.dialog.open(DialogEditUserComponent, {
-    //   data: this.userDetail,
-    // });
+    this.dialog.open(DialogEditUserComponent, {
+      data: { content: this.userDetail, docRef: this.userId },
+    });
   }
 
   openPersonalEdit() {
-    // this.dialog.open(DialogEditUserPersonalComponent, {
-    //   data: this.userDetail,
-    // });
+    this.dialog.open(DialogEditUserPersonalComponent, {
+      data: { content: this.userDetail, docRef: this.userId },
+    });
   }
 
   openProjectsEdit() {
-    // this.dialog.open(DialogEditUserProjectsComponent, {
-    //   data: this.userDetail,
-    // });
+    this.dialog.open(DialogEditUserProjectsComponent, {
+      data: { content: this.userDetail, docRef: this.userId },
+    });
   }
 }

@@ -49,6 +49,10 @@ export class UserService {
       });
   }
 
+  async updateUser(user: User, docId: string) {
+    await updateDoc(this.getSingleDocRef('users', docId), this.getCleanJson(user));
+  }
+
   startSubSingle(docId: string) {
     console.log(docId);
     this.unsubSingleUser = this.subSingleUser(docId);

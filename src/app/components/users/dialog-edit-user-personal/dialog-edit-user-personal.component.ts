@@ -9,20 +9,22 @@ import { UserService } from 'src/app/services/firebase/user.service';
   styleUrls: ['./dialog-edit-user-personal.component.scss'],
 })
 export class DialogEditUserPersonalComponent {
-  user: User = new User();
+  user: User;
+  userId: string;
   loading: boolean = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: User,
+    @Inject(MAT_DIALOG_DATA) public data:{ content: User; docRef: string },
     private userService: UserService,
     public dialogRef: MatDialogRef<DialogEditUserPersonalComponent>
   ) {
-    this.user = data;
+    this.user = new User(data.content);
+    this.userId = data.docRef;
   }
 
   updateInfo() {
-    // this.userService.updateUser(this.user);
-    // this.closeDialog();
+    this.userService.updateUser(this.user, this.userId);
+    this.closeDialog();
   }
 
   closeDialog(): void {
