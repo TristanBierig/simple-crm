@@ -6,16 +6,27 @@
 $my-primary: mat.define-palette(mat.$teal-palette);
 $my-accent: mat.define-palette(mat.$deep-purple-palette);
 
-$my-theme: mat.define-dark-theme((color: (primary: $my-primary,
+$my-theme-dark: mat.define-dark-theme((color: (primary: $my-primary,
                 accent: $my-accent,
             )));
 
-@include mat.all-component-themes($my-theme);
-@include list.theme($my-theme);
+$my-theme-light: mat.define-light-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+            )));
 
 html,
 body {
     height: 100%;
+}
+
+.dark-theme {
+    @include mat.all-component-themes($my-theme-dark);
+    @include list.theme($my-theme-dark);
+}
+
+.light-theme {
+    @include mat.all-component-themes($my-theme-light);
+    @include list.theme($my-theme-light);  
 }
 
 * {

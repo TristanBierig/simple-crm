@@ -19,6 +19,12 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span>Simple CRM</span>
+    <mat-slide-toggle
+      class="theme-toggle"
+      (change)="onDarkModeSwitched($event)"
+    >
+      <mat-icon> dark_mode </mat-icon>
+    </mat-slide-toggle>
   </mat-toolbar>
 
   <div class="router-container">
