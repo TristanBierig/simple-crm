@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/users/user-list/user.component';
+import { UserComponent } from './components/users/user-list/user-list.component';
 import { DialogAddUserComponent } from './components/users/dialog-add-user/dialog-add-user.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';

@@ -12,18 +12,24 @@ import {
   query,
   limit,
 } from '@angular/fire/firestore';
+import { Unsubscribe } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   firestore: Firestore = inject(Firestore);
+
   users: User[] = [];
   private usersSubject = new BehaviorSubject<User[]>([]);
   users$ = this.usersSubject.asObservable();
-  currentUserDetail!: User;
+
+  singleUser!: any;
+  private singleUserSubject = new BehaviorSubject<User>(this.singleUser);
+  singleUser$ = this.singleUserSubject.asObservable();
 
   unsubUsers;
+  unsubSingleUser!: Unsubscribe;
 
   constructor() {
     this.unsubUsers = this.subUsers();
@@ -31,10 +37,6 @@ export class UserService {
 
   ngOnDestroy() {
     this.unsubUsers();
-  }
-
-  cacheUserDetail(user: User) {
-    this.currentUserDetail = user;
   }
 
   async addUser(user: User) {
@@ -47,14 +49,9 @@ export class UserService {
       });
   }
 
-  async updateUser(user: User) {
-    if (user.id) {
-      let docRef = this.getSingleDocRef('users', user.id);
-
-      await updateDoc(docRef, this.getCleanJson(user)).catch((err) => {
-        console.log(err);
-      });
-    }
+  startSubSingle(docId: string) {
+    console.log(docId);
+    this.unsubSingleUser = this.subSingleUser(docId);
   }
 
   subUsers() {
@@ -66,6 +63,14 @@ export class UserService {
       });
 
       this.usersSubject.next(this.users);
+    });
+  }
+
+  subSingleUser(docId: string) {
+    return onSnapshot(this.getSingleDocRef('users', docId), (user) => {
+      this.singleUser = user.data();
+      console.log(this.singleUser);
+      this.singleUserSubject.next(this.singleUser);
     });
   }
 

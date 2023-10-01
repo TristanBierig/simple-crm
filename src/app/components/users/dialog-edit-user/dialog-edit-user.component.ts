@@ -21,7 +21,6 @@ export class DialogEditUserComponent {
   }
 
   updateInfo() {
-    this.userService.updateUser(this.user);
     this.closeDialog();
   }
 

@@ -9,8 +9,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss'],
 })
 export class UserComponent implements AfterViewInit {
   users!: User[];
@@ -49,9 +49,5 @@ export class UserComponent implements AfterViewInit {
 
   getList(): User[] {
     return this.userService.users;
-  }
-
-  cacheClickedRowDataInService(row: User) {
-    this.userService.cacheUserDetail(row);
   }
 }

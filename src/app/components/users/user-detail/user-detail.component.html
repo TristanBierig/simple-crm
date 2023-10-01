@@ -2,7 +2,7 @@
   <mat-card-header>
     <div class="btn-wrapper pin-top-right">
       <button
-      class="mr-16"
+        class="mr-16"
         [routerLink]="'/user'"
         mat-stroked-button
         extended
@@ -26,11 +26,11 @@
 
     <div mat-card-avatar class="user-detail-header-image mr-16"></div>
     <div class="user-detail-title-wrapper">
-      <mat-card-title
+      <mat-card-title *ngIf="userDetail"
         >{{ userDetail.firstName }}
         {{ userDetail.lastName }}
       </mat-card-title>
-      <mat-card-subtitle>{{ userDetail.email }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="userDetail">{{ userDetail.email }}</mat-card-subtitle>
     </div>
   </mat-card-header>
 </mat-card>
@@ -56,13 +56,13 @@
     <mat-card-content>
       <div>
         <mat-card-subtitle>Address</mat-card-subtitle>
-        <span>{{ userDetail.street }}</span>
+        <span *ngIf="userDetail">{{ userDetail.street }}</span>
         <br />
-        <span>{{ userDetail.zipCode }} {{ userDetail.city }}</span>
+        <span *ngIf="userDetail">{{ userDetail.zipCode }} {{ userDetail.city }}</span>
       </div>
       <div>
         <mat-card-subtitle>Birthday</mat-card-subtitle>
-        <span>{{ userDetail.birthDate }}</span>
+        <span *ngIf="userDetail">{{ userDetail.birthDate }}</span>
       </div>
     </mat-card-content>
   </mat-card>
