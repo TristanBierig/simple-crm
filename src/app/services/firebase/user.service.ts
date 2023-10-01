@@ -25,8 +25,6 @@ export class UserService {
   users$ = this.usersSubject.asObservable();
 
   singleUser!: any;
-  private singleUserSubject = new BehaviorSubject<User>(this.singleUser);
-  singleUser$ = this.singleUserSubject.asObservable();
 
   unsubUsers;
   unsubSingleUser!: Unsubscribe;
@@ -70,7 +68,6 @@ export class UserService {
     return onSnapshot(this.getSingleDocRef('users', docId), (user) => {
       this.singleUser = user.data();
       console.log(this.singleUser);
-      this.singleUserSubject.next(this.singleUser);
     });
   }
 

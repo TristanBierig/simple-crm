@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.class';
 import { UserService } from 'src/app/services/firebase/user.service';
@@ -25,9 +25,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.cacheUserId();
     this.userService.startSubSingle(this.userId);
-    this.userService.singleUser$.subscribe((user) => {
-      this.userDetail = user;
-    });
+    this.userDetail = this.getSingleUser();
   }
 
   cacheUserId() {
@@ -35,7 +33,7 @@ export class UserDetailComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.userId = id;
-      console.log('New User ID: ', this.userId);
+      console.log('New User ID: ', this.userId);   
     }
   }
 
