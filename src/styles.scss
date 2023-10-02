@@ -17,6 +17,7 @@ $my-theme-light: mat.define-light-theme((color: (primary: $my-primary,
 html,
 body {
     height: 100%;
+    overflow: hidden;
 }
 
 .dark-theme {

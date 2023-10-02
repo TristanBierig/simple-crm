@@ -20,6 +20,8 @@ import { UserDetailComponent } from './components/users/user-detail/user-detail.
 import { DialogEditUserComponent } from './components/users/dialog-edit-user/dialog-edit-user.component';
 import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-user-personal/dialog-edit-user-personal.component';
 import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-user-projects/dialog-edit-user-projects.component';
+import { LoginComponent } from './components/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-
     DialogEditUserComponent,
     DialogEditUserProjectsComponent,
     DialogEditUserPersonalComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

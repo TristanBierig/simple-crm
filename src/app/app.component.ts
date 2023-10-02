@@ -1,9 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  Inject,
-  Renderer2,
-} from '@angular/core';
+import { Component, Inject, Renderer2 } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
@@ -13,6 +9,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 })
 export class AppComponent {
   title = 'simple-crm';
+  isLoggedIn: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
