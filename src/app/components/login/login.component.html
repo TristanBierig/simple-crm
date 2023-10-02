@@ -37,6 +37,9 @@
           matInput
           placeholder="Ex: pat@example.com"
         />
+        <mat-error *ngIf="email?.invalid && email?.touched">{{
+          getEmailErrorMsg()
+        }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -47,6 +50,9 @@
           matInput
           placeholder="Password"
         />
+        <mat-error *ngIf="password?.invalid && password?.touched"
+          >Please enter your password</mat-error
+        >
       </mat-form-field>
 
       <div>
