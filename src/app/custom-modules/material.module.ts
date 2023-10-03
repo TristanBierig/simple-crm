@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -44,6 +45,7 @@ const MaterialComponents = [
   MatSelectModule,
   MatSlideToggleModule,
   MatSnackBarModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

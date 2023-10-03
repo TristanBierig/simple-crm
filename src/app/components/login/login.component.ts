@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/firebase/authentication.service';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AnimationDurations } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-login',
@@ -13,6 +12,7 @@ import { AnimationDurations } from '@angular/material/core';
 })
 export class LoginComponent {
   isLoading: boolean = false;
+  public ishiddenPw: boolean = true;
 
   get email() {
     return this.loginForm.get('email');
@@ -36,24 +36,24 @@ export class LoginComponent {
   login() {
     this.isLoading = true;
     // Timeout just to have time for the loading animation to run
-    // setTimeout(() => {
-    this.authService
-      .signIn({
-        email: this.loginForm.value.email!,
-        password: this.loginForm.value.password!,
-      })
-      .subscribe({
-        next: () => {},
-        error: (err) => {
-          this.isLoading = false;
-          this.snackBar.open(err.message, 'OK', { duration: 5000 });
-          console.log('Error from component: ', err.message);
-        },
-        complete: () => {
-          this.router.navigate(['dashboard']);
-        },
-      });
-    // }, 1500);
+    setTimeout(() => {
+      this.authService
+        .signIn({
+          email: this.loginForm.value.email!,
+          password: this.loginForm.value.password!,
+        })
+        .subscribe({
+          next: () => {},
+          error: () => {
+            const errorMsg = 'There was an error with your E-Mail/Password combination. Please try again.';
+            this.isLoading = false;
+            this.snackBar.open(errorMsg, 'OK', { duration: 5000 });  
+          },
+          complete: () => {
+            this.router.navigate(['dashboard']);
+          },
+        });
+    }, 1500);
   }
 
   getEmailErrorMsg(): string {

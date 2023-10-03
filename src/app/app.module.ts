@@ -22,6 +22,7 @@ import { DialogEditUserComponent } from './components/users/dialog-edit-user/dia
 import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-user-personal/dialog-edit-user-personal.component';
 import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-user-projects/dialog-edit-user-projects.component';
 import { LoginComponent } from './components/login/login.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

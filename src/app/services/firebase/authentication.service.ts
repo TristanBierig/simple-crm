@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   user,
   User,
+  signOut,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
@@ -32,21 +33,22 @@ export class AuthenticationService {
 
   signIn(params: SignIn): Observable<any> {
     return from(
-      signInWithEmailAndPassword(this.auth, params.email, params.password)
-        .then((userCredential) => {
+      signInWithEmailAndPassword(this.auth, params.email, params.password).then(
+        (userCredential) => {
           // Signed in
           const user = userCredential.user;
           console.log('Erfolgreich eingeloggt: ', user);
-          console.log('Observable: ', this.currentUser);
-         
-          // this.isLoggedIn = true;
-          // this.isLoggedInSubject.next(this.isLoggedIn);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        })
+
+          this.isLoggedIn = true;
+          this.isLoggedInSubject.next(this.isLoggedIn);
+        }
+      )
     );
+  }
+
+  signOut() {
+    signOut(this.auth).then(() => {
+    });
   }
 }
 

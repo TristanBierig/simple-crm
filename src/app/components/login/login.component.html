@@ -29,6 +29,7 @@
     <mat-divider></mat-divider>
 
     <form [formGroup]="loginForm">
+      <!-- Email Input -->
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input
@@ -36,26 +37,41 @@
           type="email"
           matInput
           placeholder="Ex: pat@example.com"
+          autocomplete="email"
         />
         <mat-error *ngIf="email?.invalid && email?.touched">{{
           getEmailErrorMsg()
         }}</mat-error>
       </mat-form-field>
 
+      <!-- Password Input -->
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
           formControlName="password"
-          type="password"
+          [type]="ishiddenPw ? 'password' : 'text'"
           matInput
           placeholder="Password"
+          autocomplete=""
         />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="ishiddenPw = !ishiddenPw"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="ishiddenPw"
+        >
+          <mat-icon>{{
+            ishiddenPw ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
         <mat-error *ngIf="password?.invalid && password?.touched">{{
           getPasswordErrorMsg()
         }}</mat-error>
       </mat-form-field>
 
       <div>
+        <!-- Buttons Container -->
         <button
           (click)="login()"
           mat-raised-button
@@ -74,9 +90,7 @@
 
     <mat-divider></mat-divider>
   </mat-card-content>
-  <mat-card-actions>
-    {{ loginForm.value | json }}
-  </mat-card-actions>
+  <mat-card-actions></mat-card-actions>
   <mat-card-footer>
     <mat-progress-bar
       *ngIf="isLoading"

@@ -27,7 +27,7 @@ body {
 
 .light-theme {
     @include mat.all-component-themes($my-theme-light);
-    @include list.theme($my-theme-light);  
+    @include list.theme($my-theme-light);
 }
 
 * {
@@ -37,6 +37,16 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Prevents background color on browser autofilled inputs
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232300;
 }
 
 .mr-16 {
