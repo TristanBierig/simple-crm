@@ -50,15 +50,25 @@
           matInput
           placeholder="Password"
         />
-        <mat-error *ngIf="password?.invalid && password?.touched"
-          >Please enter your password</mat-error
-        >
+        <mat-error *ngIf="password?.invalid && password?.touched">{{
+          getPasswordErrorMsg()
+        }}</mat-error>
       </mat-form-field>
 
       <div>
-        <button mat-raised-button type="submit" color="primary">LOGIN</button>
+        <button
+          (click)="login()"
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!loginForm.valid || isLoading"
+        >
+          LOGIN
+        </button>
         <button mat-stroked-button color="primary">REGISTER</button>
-        <button mat-button>Reset password</button>
+        <button mat-button [disabled]="!loginForm.get('email')?.valid">
+          Reset password
+        </button>
       </div>
     </form>
 
@@ -68,6 +78,10 @@
     {{ loginForm.value | json }}
   </mat-card-actions>
   <mat-card-footer>
-    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar
+      *ngIf="isLoading"
+      color="accent"
+      mode="indeterminate"
+    ></mat-progress-bar>
   </mat-card-footer>
 </mat-card>

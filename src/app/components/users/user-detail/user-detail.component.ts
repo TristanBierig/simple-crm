@@ -6,6 +6,7 @@ import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.co
 import { DialogEditUserPersonalComponent } from '../dialog-edit-user-personal/dialog-edit-user-personal.component';
 import { DialogEditUserProjectsComponent } from '../dialog-edit-user-projects/dialog-edit-user-projects.component';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-detail',
@@ -16,6 +17,8 @@ export class UserDetailComponent implements OnInit {
   userDetail!: User;
   userId!: string;
 
+  private componentIsDestroyed$ = new Subject<boolean>();
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -25,9 +28,15 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.cacheUserId();
     this.userService.startSubSingle(this.userId);
-    this.userService.singleUser$.subscribe((user) => {
+    this.userService.singleUser$.pipe(takeUntil(this.componentIsDestroyed$)).subscribe((user) => {
       this.userDetail = user;
     });
+  }
+
+  ngOnDestroy() {
+    this.userService.unsubSingleUser();
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
   }
 
   cacheUserId() {
@@ -40,10 +49,6 @@ export class UserDetailComponent implements OnInit {
 
   getSingleUser(): User {
     return this.userService.singleUser;
-  }
-
-  ngOnDestroy() {
-    this.userService.unsubSingleUser();
   }
 
   openMainEdit() {

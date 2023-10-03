@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { AuthenticationService } from './services/firebase/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,13 @@ export class AppComponent {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+    private authService: AuthenticationService
+  ) {
+    this.authService.isLoggedIn$.subscribe((data) => {
+      this.isLoggedIn = data;
+    });
+  }
 
   onDarkModeSwitched({ checked }: MatSlideToggleChange) {
     const themeClass = checked ? 'dark-theme' : 'light-theme';

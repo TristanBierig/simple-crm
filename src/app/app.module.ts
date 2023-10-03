@@ -16,6 +16,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MaterialModule } from './custom-modules/material.module';
+
 import { UserDetailComponent } from './components/users/user-detail/user-detail.component';
 import { DialogEditUserComponent } from './components/users/dialog-edit-user/dialog-edit-user.component';
 import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-user-personal/dialog-edit-user-personal.component';
