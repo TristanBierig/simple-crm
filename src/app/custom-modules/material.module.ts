@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,6 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const MaterialComponents = [
   MatInputModule,
@@ -42,6 +44,8 @@ const MaterialComponents = [
   MatChipsModule,
   MatSelectModule,
   MatSlideToggleModule,
+  MatSnackBarModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

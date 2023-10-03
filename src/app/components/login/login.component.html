@@ -1,0 +1,101 @@
+<div class="logo">
+  <img src="../../../assets/images/logo.png" alt="" />
+</div>
+
+<div class="design-line-array-1">
+  <div class="line-array-column"></div>
+  <div class="line-array-column"></div>
+  <div class="line-array-column"></div>
+</div>
+<div class="design-line-array-2">
+  <div class="line-array-column"></div>
+  <div class="line-array-column"></div>
+  <div class="line-array-column"></div>
+</div>
+<div class="design-line-array-3">
+  <div class="line-array-column"></div>
+  <div class="line-array-column"></div>
+  <div class="line-array-column"></div>
+</div>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-subtitle
+      >Enter with your account or create a new one</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <form [formGroup]="loginForm">
+      <!-- Email Input -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          type="email"
+          matInput
+          placeholder="Ex: pat@example.com"
+          autocomplete="email"
+        />
+        <mat-error *ngIf="email?.invalid && email?.touched">{{
+          getEmailErrorMsg()
+        }}</mat-error>
+      </mat-form-field>
+
+      <!-- Password Input -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          formControlName="password"
+          [type]="ishiddenPw ? 'password' : 'text'"
+          matInput
+          placeholder="Password"
+          autocomplete=""
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="ishiddenPw = !ishiddenPw"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="ishiddenPw"
+        >
+          <mat-icon>{{
+            ishiddenPw ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-error *ngIf="password?.invalid && password?.touched">{{
+          getPasswordErrorMsg()
+        }}</mat-error>
+      </mat-form-field>
+
+      <div>
+        <!-- Buttons Container -->
+        <button
+          (click)="login()"
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!loginForm.valid || isLoading"
+        >
+          LOGIN
+        </button>
+        <button mat-stroked-button color="primary">REGISTER</button>
+        <button mat-button [disabled]="!loginForm.get('email')?.valid">
+          Reset password
+        </button>
+      </div>
+    </form>
+
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions></mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar
+      *ngIf="isLoading"
+      color="accent"
+      mode="indeterminate"
+    ></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
