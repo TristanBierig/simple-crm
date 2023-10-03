@@ -1,0 +1,54 @@
+.toolbar {
+    height: 60px;
+
+    .theme-toggle {
+        margin-left: auto;
+    }
+}
+
+.mat-sidenav-container {
+    height: 100vh;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.mat-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-sidenav {
+    width: 300px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+
+    height: 60px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+
+    img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.sidenav-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        cursor: pointer;
+    }
+}
+
+.router-container {
+    padding: 16px 60px;
+}

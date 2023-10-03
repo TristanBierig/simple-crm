@@ -1,2 +1,59 @@
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@use '@angular/material' as mat;
+@use "./app/sidenav-list-theme" as list;
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$teal-palette);
+$my-accent: mat.define-palette(mat.$deep-purple-palette);
+
+$my-theme-dark: mat.define-dark-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+            )));
+
+$my-theme-light: mat.define-light-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+            )));
+
+html,
+body {
+    height: 100%;
+}
+
+.dark-theme {
+    @include mat.all-component-themes($my-theme-dark);
+    @include list.theme($my-theme-dark);
+}
+
+.light-theme {
+    @include mat.all-component-themes($my-theme-light);
+    @include list.theme($my-theme-light);  
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mr-16 {
+    margin-right: 16px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.pt-8 {
+    padding-top: 8px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.center-text {
+    justify-content: center;
+}
