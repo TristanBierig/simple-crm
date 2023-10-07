@@ -33,6 +33,6 @@ export class AppComponent {
     this.authService.signOut();
     this.router.navigate(['']);
     this.isLoggedIn = false;
-    console.log('User is logged out');
+    this.renderer.setAttribute(this.document.body, 'class', 'light-theme');
   }
 }

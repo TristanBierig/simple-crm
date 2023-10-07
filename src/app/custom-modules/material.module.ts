@@ -22,6 +22,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const MaterialComponents = [
   MatInputModule,
@@ -46,6 +47,7 @@ const MaterialComponents = [
   MatSlideToggleModule,
   MatSnackBarModule,
   MatAutocompleteModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

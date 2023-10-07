@@ -24,7 +24,12 @@ export class DialogAddUserComponent {
       firstName: this.user.firstName || '',
       lastName: this.user.lastName || '',
       email: this.user.email || '',
-      birthDate: this.birthDate.getTime(),
+      birthDate: this.birthDate.toLocaleString('de-DE', {
+        weekday: undefined,
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
       street: this.user.street || '',
       zipCode: this.user.zipCode,
       city: this.user.city || '',

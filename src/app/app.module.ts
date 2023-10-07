@@ -24,6 +24,7 @@ import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-
 import { LoginComponent } from './components/login/login.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DialogEditUserProjectsComponent,
     DialogEditUserPersonalComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

@@ -57,6 +57,7 @@
         <button
           mat-icon-button
           matSuffix
+          type="button"
           (click)="ishiddenPw = !ishiddenPw"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="ishiddenPw"
@@ -82,9 +83,16 @@
           LOGIN
         </button>
         <button mat-stroked-button color="primary">REGISTER</button>
-        <button mat-button [disabled]="!loginForm.get('email')?.valid">
+        <button
+          color="accent"
+          mat-button
+          [disabled]="!loginForm.get('email')?.valid"
+          (click)="recoverPassword()"
+          *ngIf="!isRecoveringPassword"
+        >
           Reset password
         </button>
+        <mat-spinner *ngIf="isRecoveringPassword" color="accent"></mat-spinner>
       </div>
     </form>
 

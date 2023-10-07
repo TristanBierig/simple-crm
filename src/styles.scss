@@ -21,12 +21,12 @@ body {
 }
 
 .dark-theme {
-    @include mat.all-component-themes($my-theme-dark);
+    @include mat.all-component-colors($my-theme-dark);
     @include list.theme($my-theme-dark);
 }
 
 .light-theme {
-    @include mat.all-component-themes($my-theme-light);
+    @include mat.all-component-colors($my-theme-light);
     @include list.theme($my-theme-light);
 }
 

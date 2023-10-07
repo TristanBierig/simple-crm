@@ -47,6 +47,10 @@
         padding: 16px;
         cursor: pointer;
     }
+
+    &:last-child {
+        align-self: flex-end;
+    }
 }
 
 .router-container {

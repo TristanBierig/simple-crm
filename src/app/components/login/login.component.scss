@@ -95,5 +95,11 @@ mat-card {
             gap: 8px;
             width: 80%;
         }
+
+        mat-spinner {
+            height: 28px !important;
+            width: 28px !important;
+            margin-inline: auto;
+        }
     }
 }

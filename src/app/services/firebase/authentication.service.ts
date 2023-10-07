@@ -5,8 +5,8 @@ import {
   user,
   User,
   signOut,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 
 @Injectable({
@@ -47,8 +47,15 @@ export class AuthenticationService {
   }
 
   signOut() {
-    signOut(this.auth).then(() => {
-    });
+    signOut(this.auth).then(() => {});
+  }
+
+  recoverPassword(email: string): Observable<void> {
+    return from(
+      sendPasswordResetEmail(this.auth, email).then(() => {
+        console.log('reset emnail has been send');
+      })
+    );
   }
 }
 
