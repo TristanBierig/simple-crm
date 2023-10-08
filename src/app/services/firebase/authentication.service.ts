@@ -6,6 +6,8 @@ import {
   User,
   signOut,
   sendPasswordResetEmail,
+  createUserWithEmailAndPassword,
+  getAuth,
 } from '@angular/fire/auth';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 
@@ -29,6 +31,12 @@ export class AuthenticationService {
       console.log(aUser);
       this.currentUser = aUser;
     });
+  }
+
+  createNewAccount(params: SignIn) {
+    return from(
+      createUserWithEmailAndPassword(this.auth, params.email, params.password)
+    );
   }
 
   signIn(params: SignIn): Observable<any> {

@@ -25,6 +25,8 @@ import { LoginComponent } from './components/login/login.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { RegisterComponent } from './components/register/register.component';
     DialogEditUserPersonalComponent,
     LoginComponent,
     RegisterComponent,
+    StaffComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
