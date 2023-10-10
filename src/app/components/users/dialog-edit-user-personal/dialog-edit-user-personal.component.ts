@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.class';
-import { UserService } from 'src/app/services/firebase/user.service';
+import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 
 @Component({
   selector: 'app-dialog-edit-user-personal',
@@ -14,8 +14,8 @@ export class DialogEditUserPersonalComponent {
   loading: boolean = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data:{ content: User; docRef: string },
-    private userService: UserService,
+    @Inject(MAT_DIALOG_DATA) public data: { content: User; docRef: string },
+    private fireService: FirestoreService,
     public dialogRef: MatDialogRef<DialogEditUserPersonalComponent>
   ) {
     this.user = new User(data.content);
@@ -23,7 +23,7 @@ export class DialogEditUserPersonalComponent {
   }
 
   updateInfo() {
-    this.userService.updateUser(this.user, this.userId);
+    this.fireService.updateUser(this.user, this.userId);
     this.closeDialog();
   }
 

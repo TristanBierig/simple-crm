@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'simple-crm';
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = true;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -19,9 +19,9 @@ export class AppComponent {
     private authService: AuthenticationService,
     private router: Router
   ) {
-    this.authService.isLoggedIn$.subscribe((data) => {
-      this.isLoggedIn = data;
-    });
+    // this.authService.isLoggedIn$.subscribe((data) => {
+    //   this.isLoggedIn = data;
+    // });
   }
 
   onDarkModeSwitched({ checked }: MatSlideToggleChange) {

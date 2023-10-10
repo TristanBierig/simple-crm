@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from 'src/app/models/user.class';
-import { UserService } from '../../../services/firebase/user.service';
+import { FirestoreService } from '../../../services/firebase/firestore.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -15,7 +15,7 @@ export class DialogAddUserComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddUserComponent>,
-    private userService: UserService
+    private fireService: FirestoreService
   ) {}
 
   async addUser() {
@@ -34,7 +34,7 @@ export class DialogAddUserComponent {
       zipCode: this.user.zipCode,
       city: this.user.city || '',
     };
-    await this.userService.addUser(user);
+    await this.fireService.addUser(user);
     this.loading = false;
     this.closeDialog();
   }

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -38,7 +36,7 @@ export class RegisterComponent {
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+
   });
 
   register() {

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/users/user-list/user-list.component';
+import { CustomerComponent } from './components/users/customer-list/customer-list.component';
 import { DialogAddUserComponent } from './components/users/dialog-add-user/dialog-add-user.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -23,16 +24,16 @@ import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-
 import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-user-projects/dialog-edit-user-projects.component';
 import { LoginComponent } from './components/login/login.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { RegisterComponent } from './components/register/register.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserComponent,
+    CustomerComponent,
     DialogAddUserComponent,
     UserDetailComponent,
     DialogEditUserComponent,
@@ -41,7 +42,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     LoginComponent,
     RegisterComponent,
     StaffComponent,
-    SettingsComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

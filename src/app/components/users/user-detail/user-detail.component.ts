@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.class';
-import { UserService } from 'src/app/services/firebase/user.service';
+import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogEditUserPersonalComponent } from '../dialog-edit-user-personal/dialog-edit-user-personal.component';
 import { DialogEditUserProjectsComponent } from '../dialog-edit-user-projects/dialog-edit-user-projects.component';
@@ -20,21 +20,23 @@ export class UserDetailComponent implements OnInit {
   private componentIsDestroyed$ = new Subject<boolean>();
 
   constructor(
-    private userService: UserService,
+    private fireService: FirestoreService,
     private route: ActivatedRoute,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.cacheUserId();
-    this.userService.startSubSingle(this.userId);
-    this.userService.singleUser$.pipe(takeUntil(this.componentIsDestroyed$)).subscribe((user) => {
-      this.userDetail = user;
-    });
+    this.fireService.startSubSingle(this.userId);
+    this.fireService.singleUser$
+      .pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe((user) => {
+        this.userDetail = user;
+      });
   }
 
   ngOnDestroy() {
-    this.userService.unsubSingleUser();
+    this.fireService.unsubSingleUser();
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();
   }
@@ -48,7 +50,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   getSingleUser(): User {
-    return this.userService.singleUser;
+    return this.fireService.singleUser;
   }
 
   openMainEdit() {

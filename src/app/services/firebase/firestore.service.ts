@@ -7,17 +7,19 @@ import {
   doc,
   onSnapshot,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   query,
   limit,
 } from '@angular/fire/firestore';
 import { Unsubscribe } from '@angular/fire/auth';
+import { Employee } from 'src/app/models/employee.class';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class FirestoreService {
   firestore: Firestore = inject(Firestore);
 
   users: User[] = [];
@@ -47,6 +49,10 @@ export class UserService {
       .then((docRef) => {
         console.log('Document created with ID: ', docRef?.id);
       });
+  }
+
+  async setDoc(uid: string, employee: Employee) {
+    await setDoc(doc(this.getEmployeesRef(), uid), this.getCleanJson(employee));
   }
 
   async updateUser(user: User, docId: string) {
@@ -85,6 +91,10 @@ export class UserService {
     return collection(this.firestore, 'users');
   }
 
+  getEmployeesRef() {
+    return collection(this.firestore, 'employees');
+  }
+
   getSingleDocRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
   }
@@ -102,15 +112,30 @@ export class UserService {
     };
   }
 
-  getCleanJson(user: User): {} {
-    return {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      birthDate: user.birthDate,
-      street: user.street,
-      zipCode: user.zipCode,
-      city: user.city,
-    };
+  getCleanJson(data: User | Employee): {} {
+    if (data instanceof User) {
+      return {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        birthDate: data.birthDate,
+        street: data.street,
+        zipCode: data.zipCode,
+        city: data.city,
+      };
+    } else {
+      return {
+        id: data.id,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        gender: data.gender,
+        language: data.language,
+        email: data.email,
+        birthDate: data.birthDate,
+        street: data.street,
+        zipCode: data.zipCode,
+        city: data.city,
+      };
+    }
   }
 }

@@ -10,14 +10,17 @@
       <li routerLink="/dashboard" routerLinkActive="sidenav-active-link">
         <mat-icon>dashboard</mat-icon>Dashboard
       </li>
-      <li routerLink="/user" routerLinkActive="sidenav-active-link">
+      <li routerLink="/customers" routerLinkActive="sidenav-active-link">
         <mat-icon>groups</mat-icon>Customers
       </li>
       <li routerLink="/staff" routerLinkActive="sidenav-active-link">
         <mat-icon>engineering</mat-icon>Staff
       </li>
-      <li routerLink="/settings" routerLinkActive="sidenav-active-link">
-        <mat-icon>settings</mat-icon>Settings
+      <li routerLink="/account" routerLinkActive="sidenav-active-link">
+        <mat-icon>settings</mat-icon>Account
+        <mat-icon matTooltip="Please complete your profile data" color="warn"
+          >error</mat-icon
+        >
       </li>
       <li [matMenuTriggerFor]="menu"><mat-icon>logout</mat-icon>Logout</li>
       <mat-menu #menu="matMenu" xPosition="before">

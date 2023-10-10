@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, OnInit } from '@angular/core';
 import {
   Auth,
   signInWithEmailAndPassword,
@@ -7,35 +7,37 @@ import {
   signOut,
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
-  getAuth,
 } from '@angular/fire/auth';
 import { BehaviorSubject, Observable, from } from 'rxjs';
+import { FirestoreService } from './firestore.service';
+import { Employee } from 'src/app/models/employee.class';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthenticationService implements OnInit {
   isLoggedIn: boolean = false;
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
-  userSubscription: any;
 
-  currentUser: any;
+  constructor(private fireService: FirestoreService) {}
 
-  constructor() {
-    this.userSubscription = this.user$.subscribe((aUser: User | null) => {
-      //handle user state changes here. Note, that user will be null if there is no currently logged in user.
-      console.log(aUser);
-      this.currentUser = aUser;
-    });
-  }
+  ngOnInit(): void {}
 
-  createNewAccount(params: SignIn) {
+  createNewAccount(params: SignIn): Observable<any> {
     return from(
-      createUserWithEmailAndPassword(this.auth, params.email, params.password)
+      createUserWithEmailAndPassword(
+        this.auth,
+        params.email,
+        params.password
+      ).then((cred) => {
+        const employee = new Employee(cred.user);
+        const uid = cred.user.uid;
+        this.fireService.setDoc(uid, employee);
+      })
     );
   }
 
@@ -45,8 +47,6 @@ export class AuthenticationService {
         (userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log('Erfolgreich eingeloggt: ', user);
-
           this.isLoggedIn = true;
           this.isLoggedInSubject.next(this.isLoggedIn);
         }
@@ -55,7 +55,7 @@ export class AuthenticationService {
   }
 
   signOut() {
-    signOut(this.auth).then(() => {});
+    signOut(this.auth);
   }
 
   recoverPassword(email: string): Observable<void> {
