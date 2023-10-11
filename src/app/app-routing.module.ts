@@ -5,7 +5,7 @@ import { CustomerComponent } from './components/users/customer-list/customer-lis
 import { UserDetailComponent } from './components/users/user-detail/user-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './components/accounts/account/account.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [

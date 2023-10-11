@@ -57,6 +57,10 @@ input:-webkit-autofill:active {
     margin-bottom: 16px;
 }
 
+.mt-16 {
+    margin-top: 16px;
+}
+
 .pt-8 {
     padding-top: 8px;
 }
@@ -67,4 +71,10 @@ input:-webkit-autofill:active {
 
 .center-text {
     justify-content: center;
+}
+
+.pin-top-right {
+    position: absolute;
+    right: 8px;
+    top: 8px;
 }

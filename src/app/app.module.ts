@@ -24,10 +24,10 @@ import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-
 import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-user-projects/dialog-edit-user-projects.component';
 import { LoginComponent } from './components/login/login.component';
 
-
 import { RegisterComponent } from './components/register/register.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './components/accounts/account/account.component';
+import { AccountEditDialogComponent } from './components/accounts/account-edit-dialog/account-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { AccountComponent } from './components/account/account.component';
     RegisterComponent,
     StaffComponent,
     AccountComponent,
+    AccountEditDialogComponent,
   ],
   imports: [
     BrowserModule,

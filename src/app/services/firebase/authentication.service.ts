@@ -22,10 +22,15 @@ export class AuthenticationService implements OnInit {
 
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
+  currentUser: any;
 
   constructor(private fireService: FirestoreService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user$.subscribe((employee) => {
+      this.currentUser = employee;
+    });
+  }
 
   createNewAccount(params: SignIn): Observable<any> {
     return from(
