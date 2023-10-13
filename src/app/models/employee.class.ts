@@ -12,7 +12,7 @@ export class Employee {
   street: string;
   zipCode: number;
   city: string;
-  firstLogin: boolean;
+  completeInfo: boolean;
   displayName: string;
 
   constructor(auth?: any, info?: any) {
@@ -29,7 +29,7 @@ export class Employee {
     this.city = '';
     this.zipCode = 12345;
     this.displayName = info ? info.firstName : '';
-    this.firstLogin = true;
+    this.completeInfo = true;
     this.setTimezone();
   }
 

@@ -3,6 +3,8 @@ import { Component, Inject, Renderer2 } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { AuthenticationService } from './services/firebase/authentication.service';
 import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { FirestoreService } from './services/firebase/firestore.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +14,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'simple-crm';
   isLoggedIn: boolean = true; // Should be false; For dev can switch
+  isAccountInfoComplete: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -19,14 +22,18 @@ export class AppComponent {
     private authService: AuthenticationService,
     private router: Router
   ) {
-    // this.authService.isLoggedIn$.subscribe((data) => {
-    //   this.isLoggedIn = data;
-    // });
+    this.authService.isLoggedIn$.subscribe((data) => {
+      this.isLoggedIn = data;
+    });
   }
 
   onDarkModeSwitched({ checked }: MatSlideToggleChange) {
     const themeClass = checked ? 'dark-theme' : 'light-theme';
     this.renderer.setAttribute(this.document.body, 'class', themeClass);
+  }
+
+  setCompleteInfo(isCompleteStatus: any) {
+    this.isAccountInfoComplete = isCompleteStatus;
   }
 
   logout() {

@@ -163,7 +163,7 @@ export class FirestoreService {
         street: data.street,
         zipCode: data.zipCode,
         city: data.city,
-        firstLogin: data.firstLogin,
+        completeInfo: data.completeInfo,
         displayName: data.displayName,
       };
     }
