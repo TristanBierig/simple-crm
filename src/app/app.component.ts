@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'simple-crm';
-  isLoggedIn: boolean = true;
+  isLoggedIn: boolean = true; // Should be false; For dev can switch
 
   constructor(
     @Inject(DOCUMENT) private document: Document,

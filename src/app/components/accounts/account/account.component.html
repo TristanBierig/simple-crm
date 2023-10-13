@@ -1,7 +1,9 @@
 <mat-card *ngIf="currentUser" class="account-profile-card">
   <mat-card-header>
     <div mat-card-avatar class="account-profile-header-image"></div>
-    <mat-card-title>{{ currentUser.firstName }}</mat-card-title>
+    <mat-card-title
+      >{{ currentUser.firstName }} {{ currentUser.lastName }}</mat-card-title
+    >
     <mat-card-subtitle>{{ currentUser.email }}</mat-card-subtitle>
   </mat-card-header>
 
@@ -9,29 +11,30 @@
     <div class="profile-info-column-container">
       <div class="profile-info-wrapper">
         <mat-card-subtitle>Whole Name</mat-card-subtitle>
-        <span>Vorname Nachname</span>
+        <span>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
       </div>
       <div class="profile-info-wrapper">
-        <mat-card-subtitle>Display Name</mat-card-subtitle>
-        <span>Vorname Nachname</span>
+        <mat-card-subtitle>Region</mat-card-subtitle>
+        <span>{{ currentUser.region }}</span>
       </div>
       <div class="profile-info-wrapper">
         <mat-card-subtitle>Gender</mat-card-subtitle>
-        <span>Vorname Nachname</span>
+        <span>{{ currentUser.gender }}</span>
       </div>
     </div>
+
     <div class="profile-info-column-container">
       <div class="profile-info-wrapper">
-        <mat-card-subtitle>Region</mat-card-subtitle>
-        <span>Vorname Nachname</span>
-      </div>
-      <div class="profile-info-wrapper">
-        <mat-card-subtitle>Language</mat-card-subtitle>
-        <span>Vorname Nachname</span>
+        <mat-card-subtitle>Display Name</mat-card-subtitle>
+        <span>{{ currentUser.firstName }}</span>
       </div>
       <div class="profile-info-wrapper">
         <mat-card-subtitle>Timezone</mat-card-subtitle>
-        <span>Vorname Nachname</span>
+        <span>{{ currentUser.timeZone }}</span>
+      </div>
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Language</mat-card-subtitle>
+        <span>{{ currentUser.language }}</span>
       </div>
     </div>
   </mat-card-content>
@@ -51,9 +54,9 @@
     >
   </mat-card-header>
   <mat-card-content>
-    <div class="mt-16 profile-email-wrapper">
+    <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
       <mat-icon color="primary">mail</mat-icon>
-      <span>email@email.de</span>
+      <span>{{ currentUser.email }}</span>
     </div>
   </mat-card-content>
 </mat-card>
@@ -67,9 +70,9 @@
     >
   </mat-card-header>
   <mat-card-content>
-    <div class="mt-16 profile-email-wrapper">
+    <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
       <mat-icon color="primary">call</mat-icon>
-      <span>+49 123456789</span>
+      <span>{{ currentUser.phone }}</span>
     </div>
   </mat-card-content>
 </mat-card>

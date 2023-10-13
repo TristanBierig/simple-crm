@@ -28,13 +28,12 @@ export class AuthenticationService implements OnInit {
   constructor(private fireService: FirestoreService) {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
         this.currentUserId = uid;
+        console.log('Logged in as: ', user);
       } else {
         // User is signed out
-        // ...
+        console.log('Logged out user: ', user);
       }
     });
   }

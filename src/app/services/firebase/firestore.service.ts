@@ -30,8 +30,15 @@ export class FirestoreService {
   private singleUserSubject = new BehaviorSubject<User>(this.singleUser);
   singleUser$ = this.singleUserSubject.asObservable();
 
+  singleEmployee!: any;
+  private singleEmployeeSubject = new BehaviorSubject<Employee>(
+    this.singleEmployee
+  );
+  singleEmployee$ = this.singleEmployeeSubject.asObservable();
+
   unsubUsers: Unsubscribe;
   unsubSingleUser!: Unsubscribe;
+  unsubSingleEmployee!: Unsubscribe;
 
   constructor() {
     this.unsubUsers = this.subUsers();
@@ -55,16 +62,26 @@ export class FirestoreService {
     await setDoc(doc(this.getEmployeesRef(), uid), this.getCleanJson(employee));
   }
 
-  async updateUser(user: User, docId: string) {
-    await updateDoc(
-      this.getSingleDocRef('users', docId),
-      this.getCleanJson(user)
-    );
+  async updateDoc(payload: User, docId: string) {
+    if (payload instanceof User) {
+      await updateDoc(
+        this.getSingleDocRef('users', docId),
+        this.getCleanJson(payload)
+      );
+    } else {
+      await updateDoc(
+        this.getSingleDocRef('employees', docId),
+        this.getCleanJson(payload)
+      );
+    }
   }
 
   startSubSingle(docId: string) {
-    console.log(docId);
     this.unsubSingleUser = this.subSingleUser(docId);
+  }
+
+  startSubSingleEmployee(docId: string) {
+    this.unsubSingleEmployee = this.subSingleEmployee(docId);
   }
 
   subUsers() {
@@ -84,6 +101,14 @@ export class FirestoreService {
       this.singleUser = user.data();
       console.log(this.singleUser);
       this.singleUserSubject.next(this.singleUser);
+    });
+  }
+
+  subSingleEmployee(docId: string) {
+    return onSnapshot(this.getSingleDocRef('employees', docId), (employee) => {
+      this.singleEmployee = employee.data();
+      console.log('Snapshot from Service for data: ', this.singleEmployee);
+      this.singleEmployeeSubject.next(this.singleEmployee);
     });
   }
 
@@ -131,10 +156,15 @@ export class FirestoreService {
         gender: data.gender,
         language: data.language,
         email: data.email,
+        phone: data.phone,
+        region: data.region,
+        timeZone: data.timeZone,
         birthDate: data.birthDate,
         street: data.street,
         zipCode: data.zipCode,
         city: data.city,
+        firstLogin: data.firstLogin,
+        displayName: data.displayName,
       };
     }
   }

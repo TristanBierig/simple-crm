@@ -23,7 +23,7 @@ export class DialogEditUserPersonalComponent {
   }
 
   updateInfo() {
-    this.fireService.updateUser(this.user, this.userId);
+    this.fireService.updateDoc(this.user, this.userId);
     this.closeDialog();
   }
 
