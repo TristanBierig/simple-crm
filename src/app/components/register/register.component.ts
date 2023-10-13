@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/firebase/authentication.service';
@@ -16,14 +13,17 @@ export class RegisterComponent {
   isLoading: boolean = false;
   public ishiddenPw: boolean = true;
 
+  get firstName() {
+    return this.registerForm.get('firstName');
+  }
+  get lastName() {
+    return this.registerForm.get('lastName');
+  }
   get email() {
     return this.registerForm.get('email');
   }
   get password() {
     return this.registerForm.get('password');
-  }
-  get confirmPassword() {
-    return this.registerForm.get('confirmPassword');
   }
 
   constructor(
@@ -34,9 +34,10 @@ export class RegisterComponent {
   ) {}
 
   registerForm = this.fb.group({
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-
   });
 
   register() {
@@ -44,6 +45,8 @@ export class RegisterComponent {
       .createNewAccount({
         email: this.registerForm.value.email!,
         password: this.registerForm.value.password!,
+        firstName: this.registerForm.value.firstName!,
+        lastName: this.registerForm.value.lastName!,
       })
       .subscribe({
         error: () => {
@@ -60,5 +63,21 @@ export class RegisterComponent {
           this.snackBar.open(errorMsg, 'OK', { duration: 5000 });
         },
       });
+  }
+
+  getNameErrMsg() {
+    return 'Please enter a name';
+  }
+
+  getEmailErrMsgRequired() {
+    return 'Email is required';
+  }
+
+  getEmailErrMsgFormat() {
+    return 'Please enter a valid email address';
+  }
+
+  getPasswordErrMsg() {
+    return 'Password needs to be at least 6 Characters'
   }
 }

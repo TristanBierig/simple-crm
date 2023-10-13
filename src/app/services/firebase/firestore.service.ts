@@ -30,7 +30,7 @@ export class FirestoreService {
   private singleUserSubject = new BehaviorSubject<User>(this.singleUser);
   singleUser$ = this.singleUserSubject.asObservable();
 
-  unsubUsers;
+  unsubUsers: Unsubscribe;
   unsubSingleUser!: Unsubscribe;
 
   constructor() {

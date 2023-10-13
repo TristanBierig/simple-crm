@@ -7,6 +7,7 @@ import {
   signOut,
   sendPasswordResetEmail,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from '@angular/fire/auth';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { FirestoreService } from './firestore.service';
@@ -22,24 +23,32 @@ export class AuthenticationService implements OnInit {
 
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
-  currentUser: any;
+  currentUserId: any;
 
-  constructor(private fireService: FirestoreService) {}
-
-  ngOnInit(): void {
-    this.user$.subscribe((employee) => {
-      this.currentUser = employee;
+  constructor(private fireService: FirestoreService) {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        this.currentUserId = uid;
+      } else {
+        // User is signed out
+        // ...
+      }
     });
   }
 
-  createNewAccount(params: SignIn): Observable<any> {
+  ngOnInit(): void {}
+
+  createNewAccount(params: any): Observable<any> {
     return from(
       createUserWithEmailAndPassword(
         this.auth,
         params.email,
         params.password
       ).then((cred) => {
-        const employee = new Employee(cred.user);
+        const employee = new Employee(cred.user, params);
         const uid = cred.user.uid;
         this.fireService.setDoc(uid, employee);
       })

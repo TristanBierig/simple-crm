@@ -11,13 +11,13 @@ export class Employee {
   city: string;
   firstLogin: boolean;
 
-  constructor(obj?: any) {
-    this.id = obj ? obj.uid : '';
+  constructor(auth?: any, info?: any) {
+    this.id = auth ? auth.uid : '';
     this.gender = '';
     this.language = '';
-    this.firstName = '';
-    this.lastName = '';
-    this.email = obj ? obj.email : '';
+    this.firstName = info ? info.firstName : '';
+    this.lastName = info ? info.lastName : '';
+    this.email = auth ? auth.email : '';
     this.birthDate = '';
     this.street = '';
     this.zipCode = 12345;

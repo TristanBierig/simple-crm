@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/firebase/authentication.service';
 import { AccountEditDialogComponent } from '../account-edit-dialog/account-edit-dialog.component';
-import { Employee } from 'src/app/models/employee.class';
 
 @Component({
   selector: 'app-account',
@@ -11,7 +10,9 @@ import { Employee } from 'src/app/models/employee.class';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent {
+  currentUserId!: string | undefined;
   currentUser!: any;
+
   private componentIsDestroyed$ = new Subject<boolean>();
 
   constructor(
@@ -22,9 +23,9 @@ export class AccountComponent {
   }
 
   setCurrentUser() {
-    this.authService.user$.subscribe((user) => {
-      this.currentUser = user;
-    });
+    setTimeout(() => {
+      console.log(this.authService.currentUserId);
+    }, 1000);
   }
 
   ngOnDestroy() {

@@ -27,8 +27,38 @@
   </mat-card-header>
   <mat-card-content>
     <mat-divider></mat-divider>
-
     <form [formGroup]="registerForm">
+      <!-- Names -->
+      <div class="register-name-wrapper">
+        <mat-form-field appearance="outline">
+          <mat-label>Firstname</mat-label>
+          <input
+            formControlName="firstName"
+            type="text"
+            matInput
+            placeholder="Firstname"
+            autocomplete="given-name"
+          />
+          <mat-error *ngIf="firstName?.invalid && firstName?.touched">{{
+            getNameErrMsg()
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input
+            formControlName="lastName"
+            type="text"
+            matInput
+            placeholder="Lastname"
+            autocomplete="family-name"
+          />
+          <mat-error *ngIf="lastName?.invalid && lastName?.touched">{{
+            getNameErrMsg()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+
       <!-- Email Input -->
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
@@ -39,7 +69,12 @@
           placeholder="Ex: pat@example.com"
           autocomplete="email"
         />
-        <mat-error *ngIf="email?.invalid && email?.touched"></mat-error>
+        <mat-error *ngIf="email?.hasError('required') && email?.touched">
+          {{ getEmailErrMsgRequired() }}
+        </mat-error>
+        <mat-error *ngIf="email?.hasError('email') && email?.touched">{{
+          getEmailErrMsgFormat()
+        }}</mat-error>
       </mat-form-field>
 
       <!-- Password Input -->
@@ -64,6 +99,9 @@
             ishiddenPw ? "visibility_off" : "visibility"
           }}</mat-icon>
         </button>
+        <mat-error *ngIf="password?.invalid && password?.touched">{{
+          getPasswordErrMsg()
+        }}</mat-error>
       </mat-form-field>
 
       <div>

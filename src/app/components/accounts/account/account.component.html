@@ -1,7 +1,7 @@
 <mat-card *ngIf="currentUser" class="account-profile-card">
   <mat-card-header>
     <div mat-card-avatar class="account-profile-header-image"></div>
-    <mat-card-title>Vorname Nachname</mat-card-title>
+    <mat-card-title>{{ currentUser.firstName }}</mat-card-title>
     <mat-card-subtitle>{{ currentUser.email }}</mat-card-subtitle>
   </mat-card-header>
 
