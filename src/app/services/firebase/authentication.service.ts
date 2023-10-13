@@ -30,6 +30,7 @@ export class AuthenticationService implements OnInit {
       if (user) {
         const uid = user.uid;
         this.currentUserId = uid;
+        this.fireService.startSubSingleEmployee(this.currentUserId);
         console.log('Logged in as: ', user);
       } else {
         // User is signed out

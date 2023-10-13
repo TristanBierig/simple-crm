@@ -18,7 +18,10 @@
       </li>
       <li routerLink="/account" routerLinkActive="sidenav-active-link">
         <mat-icon>settings</mat-icon>Account
-        <mat-icon *ngIf="!isAccountInfoComplete" matTooltip="Please complete your account data" color="warn"
+        <mat-icon
+          *ngIf="!isAccountInfoComplete"
+          matTooltip="Please complete your account data"
+          color="warn"
           >error</mat-icon
         >
       </li>
@@ -48,6 +51,6 @@
   </mat-toolbar>
 
   <div class="router-container">
-    <router-outlet (completeInfo)="setCompleteInfo($event)"></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

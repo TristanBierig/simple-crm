@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/firebase/authentication.service';
@@ -12,7 +12,6 @@ import { FirestoreService } from 'src/app/services/firebase/firestore.service';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
-  @Output() completeInfo = new EventEmitter<boolean>();
   currentUserId!: string;
   currentUser!: Employee;
 
@@ -27,11 +26,6 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.currentUserId = this.authService.currentUserId;
     this.setCurrentUser();
-    this.setCompleteInfo();
-  }
-
-  setCompleteInfo() {
-    this.completeInfo.emit(this.currentUser.completeInfo);
   }
 
   setCurrentUser() {
