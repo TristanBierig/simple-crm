@@ -1,1 +1,31 @@
-<p>staff works!</p>
+<div class="action-buttons mb-16">
+  <button mat-button color="accent" (click)="accordion.openAll()">
+    Expand All
+  </button>
+  <button mat-button color="accent" (click)="accordion.closeAll()">
+    Collapse All
+  </button>
+</div>
+<mat-accordion class="headers-align" multi>
+  <mat-expansion-panel *ngFor="let employee of employeeList">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="list-profile-wrapper">
+          <div class="profile-img"></div>
+          <div>{{ employee.displayName }}</div>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description>
+        <div>{{ employee.email }}</div>
+        <div>{{ employee.phone }}</div>
+        <div>{{ employee.region }}</div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!-- Content here  -->
+    <a class="email-link" href="mailto: {{ employee.email }}">
+      <mat-icon color="accent">email</mat-icon>{{ employee.email }}</a
+    >
+    <div>{{ employee.phone }}</div>
+    <div>{{ employee.region }}</div>
+  </mat-expansion-panel>
+</mat-accordion>

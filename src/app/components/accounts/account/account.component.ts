@@ -5,6 +5,8 @@ import { AuthenticationService } from 'src/app/services/firebase/authentication.
 import { AccountEditDialogComponent } from '../account-edit-dialog/account-edit-dialog.component';
 import { Employee } from 'src/app/models/employee.class';
 import { FirestoreService } from 'src/app/services/firebase/firestore.service';
+import { AccountEditEmailDialogComponent } from '../account-edit-email-dialog/account-edit-email-dialog.component';
+import { AccountEditPhoneDialogComponent } from '../account-edit-phone-dialog/account-edit-phone-dialog.component';
 
 @Component({
   selector: 'app-account',
@@ -43,9 +45,26 @@ export class AccountComponent implements OnInit {
     this.componentIsDestroyed$.complete();
   }
 
-  openDialog(): void {
-    this.dialog.open(AccountEditDialogComponent, {
-      data: this.currentUser,
-    });
+  openDialog(target: string): void {
+    switch (target) {
+      case 'main':
+        this.dialog.open(AccountEditDialogComponent, {
+          data: this.currentUser,
+        });
+        break;
+      case 'email':
+        this.dialog.open(AccountEditEmailDialogComponent, {
+          data: this.currentUser,
+        });
+        break;
+      case 'phone':
+        this.dialog.open(AccountEditPhoneDialogComponent, {
+          data: this.currentUser,
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 }

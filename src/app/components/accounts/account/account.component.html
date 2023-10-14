@@ -26,7 +26,7 @@
     <div class="profile-info-column-container">
       <div class="profile-info-wrapper">
         <mat-card-subtitle>Display Name</mat-card-subtitle>
-        <span>{{ currentUser.firstName }}</span>
+        <span>{{ currentUser.displayName }}</span>
       </div>
       <div class="profile-info-wrapper">
         <mat-card-subtitle>Timezone</mat-card-subtitle>
@@ -40,12 +40,12 @@
   </mat-card-content>
 
   <div class="pin-top-right">
-    <button (click)="openDialog()" color="accent" mat-flat-button>Edit</button>
+    <button (click)="openDialog('main')" color="accent" mat-flat-button>Edit</button>
   </div>
 </mat-card>
 
 <!-- Email Card -->
-<mat-card class="example-card">
+<mat-card class="relative">
   <mat-card-header>
     <mat-card-title>Email address</mat-card-title>
     <mat-card-subtitle
@@ -58,11 +58,16 @@
       <mat-icon color="primary">mail</mat-icon>
       <span>{{ currentUser.email }}</span>
     </div>
+    <div class="pin-top-right">
+      <button (click)="openDialog('email')" mat-mini-fab color="accent">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
   </mat-card-content>
 </mat-card>
 
 <!-- Phone Card -->
-<mat-card class="example-card">
+<mat-card class="relative">
   <mat-card-header>
     <mat-card-title>Phone number</mat-card-title>
     <mat-card-subtitle
@@ -73,6 +78,11 @@
     <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
       <mat-icon color="primary">call</mat-icon>
       <span>{{ currentUser.phone }}</span>
+    </div>
+    <div class="pin-top-right">
+      <button (click)="openDialog('phone')" mat-mini-fab color="accent">
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
   </mat-card-content>
 </mat-card>

@@ -23,9 +23,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const MaterialComponents = [
   MatInputModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatDatepickerModule,
   MatNativeDateModule,

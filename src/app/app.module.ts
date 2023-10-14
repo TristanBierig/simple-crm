@@ -29,6 +29,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { AccountComponent } from './components/accounts/account/account.component';
 import { AccountEditDialogComponent } from './components/accounts/account-edit-dialog/account-edit-dialog.component';
+import { AccountEditEmailDialogComponent } from './components/accounts/account-edit-email-dialog/account-edit-email-dialog.component';
+import { AccountEditPhoneDialogComponent } from './components/accounts/account-edit-phone-dialog/account-edit-phone-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AccountEditDialogComponent } from './components/accounts/account-edit-d
     StaffComponent,
     AccountComponent,
     AccountEditDialogComponent,
+    AccountEditEmailDialogComponent,
+    AccountEditPhoneDialogComponent,
   ],
   imports: [
     BrowserModule,

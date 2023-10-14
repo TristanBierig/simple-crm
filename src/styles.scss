@@ -4,7 +4,7 @@
 @include mat.core();
 
 $my-primary: mat.define-palette(mat.$teal-palette);
-$my-accent: mat.define-palette(mat.$deep-purple-palette);
+$my-accent: mat.define-palette(mat.$deep-purple-palette, 300);
 
 $my-theme-dark: mat.define-dark-theme((color: (primary: $my-primary,
                 accent: $my-accent,
@@ -77,4 +77,8 @@ input:-webkit-autofill:active {
     position: absolute;
     right: 8px;
     top: 8px;
+}
+
+.relative {
+    position: relative;
 }

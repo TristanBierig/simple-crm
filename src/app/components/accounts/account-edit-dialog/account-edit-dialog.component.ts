@@ -11,7 +11,7 @@ import { FirestoreService } from 'src/app/services/firebase/firestore.service';
   styleUrls: ['./account-edit-dialog.component.scss'],
 })
 export class AccountEditDialogComponent implements OnInit {
-  genders: string[] = ['male', 'female', 'other'];
+  genders: string[] = ['Male', 'Female', 'Other'];
   regions: string[] = [];
   timezones: string[] = [];
 
@@ -54,15 +54,31 @@ export class AccountEditDialogComponent implements OnInit {
       });
   }
 
-
   updateInfo() {
     this.employee.region = this.selectedRegion;
     this.employee.gender = this.selectedGender;
+    this.checkForCompleteInfo();
     this.fireService.updateDoc(this.employee, this.employee.id);
     this.closeDialog();
   }
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  checkForCompleteInfo() {
+    const emp = this.employee;
+    if (
+      emp.firstName &&
+      emp.lastName &&
+      emp.displayName &&
+      emp.gender &&
+      emp.language &&
+      emp.region
+    ) {
+      this.employee.completeInfo = true;
+    } else {
+      this.employee.completeInfo = false;
+    }
   }
 }

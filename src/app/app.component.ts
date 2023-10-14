@@ -10,10 +10,10 @@ import { FirestoreService } from './services/firebase/firestore.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'simple-crm';
-  isLoggedIn: boolean = true; // Should be false; For dev can switch
-  isAccountInfoComplete: boolean = false;
+  isLoggedIn: boolean = false; // Should be false; For dev can switch
+  isAccountInfoComplete: boolean = true;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -27,7 +27,7 @@ export class AppComponent {
     });
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.setCompleteInfo();
   }
 

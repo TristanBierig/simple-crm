@@ -26,6 +26,10 @@ export class FirestoreService {
   private usersSubject = new BehaviorSubject<User[]>([]);
   users$ = this.usersSubject.asObservable();
 
+  employees: Employee[] = [];
+  private employeesSubject = new BehaviorSubject<Employee[]>([]);
+  employees$ = this.employeesSubject.asObservable();
+
   singleUser!: any;
   private singleUserSubject = new BehaviorSubject<User>(this.singleUser);
   singleUser$ = this.singleUserSubject.asObservable();
@@ -37,11 +41,12 @@ export class FirestoreService {
   singleEmployee$ = this.singleEmployeeSubject.asObservable();
 
   unsubUsers: Unsubscribe;
+  unsubEmployees!: Unsubscribe;
   unsubSingleUser!: Unsubscribe;
   unsubSingleEmployee!: Unsubscribe;
 
   constructor() {
-    this.unsubUsers = this.subUsers();
+    this.unsubUsers = this.subCollection('users');
   }
 
   ngOnDestroy() {
@@ -62,7 +67,7 @@ export class FirestoreService {
     await setDoc(doc(this.getEmployeesRef(), uid), this.getCleanJson(employee));
   }
 
-  async updateDoc(payload: User, docId: string) {
+  async updateDoc(payload: User | Employee, docId: string) {
     if (payload instanceof User) {
       await updateDoc(
         this.getSingleDocRef('users', docId),
@@ -84,16 +89,33 @@ export class FirestoreService {
     this.unsubSingleEmployee = this.subSingleEmployee(docId);
   }
 
-  subUsers() {
-    const q = query(this.getUsersRef(), limit(100));
-    return onSnapshot(q, (list) => {
-      this.users = [];
-      list.forEach((element) => {
-        this.users.push(this.setUserObject(element.data(), element.id));
-      });
+  startSubEmployeeList() {
+    this.unsubEmployees = this.subCollection('employee');
+  }
 
-      this.usersSubject.next(this.users);
-    });
+  subCollection(target: string) {
+    if (target == 'users') {
+      const q = query(this.getUsersRef(), limit(100));
+      return onSnapshot(q, (list) => {
+        this.users = [];
+        list.forEach((element) => {
+          this.users.push(this.setUserObject(element.data(), element.id));
+        });
+
+        this.usersSubject.next(this.users);
+      });
+    } else {
+      const q = query(this.getEmployeesRef(), limit(100));
+      return onSnapshot(q, (list) => {
+        this.employees = [];
+        list.forEach((element) => {
+          this.employees.push(
+            this.setEmployeeObject(element.data())
+          );
+        });
+        this.employeesSubject.next(this.employees);
+      });
+    }
   }
 
   subSingleUser(docId: string) {
@@ -132,8 +154,28 @@ export class FirestoreService {
       email: obj.email || '',
       birthDate: obj.birthDate || '',
       street: obj.street || '',
-      zipCode: obj.zipCode || '',
+      zipCode: obj.zipCode || 0,
       city: obj.city || '',
+    };
+  }
+
+  setEmployeeObject(obj: any): any {
+    return {
+      id: obj.id,
+      firstName: obj.firstName,
+      lastName: obj.lastName,
+      gender: obj.gender,
+      language: obj.language,
+      email: obj.email,
+      phone: obj.phone,
+      region: obj.region,
+      timeZone: obj.timeZone || '',
+      birthDate: obj.birthDate,
+      street: obj.street,
+      zipCode: obj.zipCode,
+      city: obj.city,
+      completeInfo: obj.completeInfo,
+      displayName: obj.displayName,
     };
   }
 
