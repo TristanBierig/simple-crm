@@ -7,6 +7,9 @@ export class Customer {
   street: string;
   zipCode: number;
   city: string;
+  leadStatus: 'lost' | 'pending' | 'fullfilled';
+  leadOwner: string;
+  leadStartDate: string;
 
   constructor(obj?: any) {
     this.id = obj ? obj.id : '';
@@ -17,5 +20,8 @@ export class Customer {
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';
+    this.leadStatus = obj ? obj.leadStatus : '';
+    this.leadOwner = obj ? obj.leadOwner : '';
+    this.leadStartDate = obj ? obj.leadStartDate : '';
   }
 }

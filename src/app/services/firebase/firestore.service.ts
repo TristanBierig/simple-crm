@@ -30,7 +30,9 @@ export class FirestoreService {
   employees$ = this.employeesSubject.asObservable();
 
   singleCustomer!: any;
-  private singleCustomerSubject = new BehaviorSubject<Customer>(this.singleCustomer);
+  private singleCustomerSubject = new BehaviorSubject<Customer>(
+    this.singleCustomer
+  );
   singleCustomer$ = this.singleCustomerSubject.asObservable();
 
   singleEmployee!: any;
@@ -63,6 +65,8 @@ export class FirestoreService {
   }
 
   async setDoc(uid: string, employee: Employee) {
+    console.log(this.getCleanJson(employee));
+
     await setDoc(doc(this.getEmployeesRef(), uid), this.getCleanJson(employee));
   }
 
@@ -98,9 +102,10 @@ export class FirestoreService {
       return onSnapshot(q, (list) => {
         this.customers = [];
         list.forEach((element) => {
-          this.customers.push(this.setCustomerObject(element.data(), element.id));
+          this.customers.push(
+            this.setCustomerObject(element.data(), element.id)
+          );
         });
-
         this.customersSubject.next(this.customers);
       });
     } else {
@@ -153,6 +158,9 @@ export class FirestoreService {
       street: obj.street || '',
       zipCode: obj.zipCode || 0,
       city: obj.city || '',
+      leadOwner: obj.leadOwner || '',
+      leadStartDate: obj.leadStartDate || '',
+      leadStatus: obj.leadStatus || '',
     };
   }
 
@@ -173,6 +181,7 @@ export class FirestoreService {
       city: obj.city,
       completeInfo: obj.completeInfo,
       displayName: obj.displayName,
+      role: obj.role,
     };
   }
 
@@ -186,6 +195,9 @@ export class FirestoreService {
         street: data.street,
         zipCode: data.zipCode,
         city: data.city,
+        leadOwner: data.leadOwner,
+        leadStartDate: data.leadStartDate,
+        leadStatus: data.leadStatus,
       };
     } else {
       return {
@@ -204,6 +216,7 @@ export class FirestoreService {
         city: data.city,
         completeInfo: data.completeInfo,
         displayName: data.displayName,
+        role: data.role,
       };
     }
   }

@@ -14,6 +14,7 @@ export class Employee {
   city: string;
   completeInfo: boolean;
   displayName: string;
+  role: string;
 
   constructor(auth?: any, info?: any) {
     this.id = auth ? auth.uid : '';
@@ -29,7 +30,8 @@ export class Employee {
     this.city = '';
     this.zipCode = 12345;
     this.displayName = info ? info.firstName : '';
-    this.completeInfo = true;
+    this.completeInfo = false;
+    this.role = '';
     this.setTimezone();
   }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Customer } from 'src/app/models/customer.class';
 import { FirestoreService } from '../../../services/firebase/firestore.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Employee } from 'src/app/models/employee.class';
 
 @Component({
   selector: 'app-dialog-add-customer',
@@ -12,11 +13,14 @@ export class DialogAddCustomerComponent {
   customer: Customer = new Customer();
   birthDate!: Date;
   loading: boolean = false;
+  employee: Employee;
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddCustomerComponent>,
     private fireService: FirestoreService
-  ) {}
+  ) {
+    this.employee = this.fireService.singleEmployee;
+  }
 
   async addCustomer() {
     this.loading = true;
@@ -33,6 +37,15 @@ export class DialogAddCustomerComponent {
       street: this.customer.street || '',
       zipCode: this.customer.zipCode,
       city: this.customer.city || '',
+      leadOwner: this.employee.displayName || '',
+      leadStartDate:
+        new Date().toLocaleString('de-DE', {
+          weekday: undefined,
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }) || '',
+      leadStatus: 'pending' || '',
     };
     await this.fireService.addCustomer(customer);
     this.loading = false;

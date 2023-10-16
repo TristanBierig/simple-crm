@@ -57,10 +57,10 @@ export class RegisterComponent {
         },
         complete: () => {
           this.router.navigate(['/']);
-          const errorMsg =
+          const successMsg =
             'Account successfully created. You can now log in with your credentials!';
           this.isLoading = false;
-          this.snackBar.open(errorMsg, 'OK', { duration: 5000 });
+          this.snackBar.open(successMsg, 'OK', { duration: 5000 });
         },
       });
   }

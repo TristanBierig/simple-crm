@@ -13,7 +13,7 @@ import { FirestoreService } from './services/firebase/firestore.service';
 export class AppComponent implements OnInit {
   title = 'simple-crm';
   isLoggedIn: boolean = false; // Should be false; For dev can switch
-  isAccountInfoComplete: boolean = true;
+  isAccountInfoComplete: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,

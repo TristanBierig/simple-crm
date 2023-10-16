@@ -12,12 +12,14 @@ import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 })
 export class AccountEditDialogComponent implements OnInit {
   genders: string[] = ['Male', 'Female', 'Other'];
+  roles: string[] = ['Sales', 'Frontend Developer', 'Backend Developer', 'Fullstack Developer', 'Marketing', 'HR'];
   regions: string[] = [];
   timezones: string[] = [];
 
   selectedRegion!: string;
   selectedGender!: string;
   selectedTimezone!: string;
+  selectedRole!: string;
 
   employee: Employee;
 
@@ -32,6 +34,7 @@ export class AccountEditDialogComponent implements OnInit {
     this.employee = data;
     this.selectedRegion = data.region;
     this.selectedGender = data.gender;
+    this.selectedRole = data.role;
   }
 
   ngOnInit(): void {
@@ -57,6 +60,7 @@ export class AccountEditDialogComponent implements OnInit {
   updateInfo() {
     this.employee.region = this.selectedRegion;
     this.employee.gender = this.selectedGender;
+    this.employee.role = this.selectedRole;
     this.checkForCompleteInfo();
     this.fireService.updateDoc(this.employee, this.employee.id);
     this.closeDialog();
@@ -74,7 +78,8 @@ export class AccountEditDialogComponent implements OnInit {
       emp.displayName &&
       emp.gender &&
       emp.language &&
-      emp.region
+      emp.region &&
+      emp.role
     ) {
       this.employee.completeInfo = true;
     } else {
