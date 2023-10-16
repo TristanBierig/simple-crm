@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { User } from 'src/app/models/user.class';
+import { Customer } from 'src/app/models/customer.class';
 import { BehaviorSubject } from 'rxjs';
 import {
   Firestore,
@@ -9,7 +9,6 @@ import {
   addDoc,
   setDoc,
   updateDoc,
-  deleteDoc,
   query,
   limit,
 } from '@angular/fire/firestore';
@@ -22,17 +21,17 @@ import { Employee } from 'src/app/models/employee.class';
 export class FirestoreService {
   firestore: Firestore = inject(Firestore);
 
-  users: User[] = [];
-  private usersSubject = new BehaviorSubject<User[]>([]);
-  users$ = this.usersSubject.asObservable();
+  customers: Customer[] = [];
+  private customersSubject = new BehaviorSubject<Customer[]>([]);
+  customers$ = this.customersSubject.asObservable();
 
   employees: Employee[] = [];
   private employeesSubject = new BehaviorSubject<Employee[]>([]);
   employees$ = this.employeesSubject.asObservable();
 
-  singleUser!: any;
-  private singleUserSubject = new BehaviorSubject<User>(this.singleUser);
-  singleUser$ = this.singleUserSubject.asObservable();
+  singleCustomer!: any;
+  private singleCustomerSubject = new BehaviorSubject<Customer>(this.singleCustomer);
+  singleCustomer$ = this.singleCustomerSubject.asObservable();
 
   singleEmployee!: any;
   private singleEmployeeSubject = new BehaviorSubject<Employee>(
@@ -40,21 +39,21 @@ export class FirestoreService {
   );
   singleEmployee$ = this.singleEmployeeSubject.asObservable();
 
-  unsubUsers: Unsubscribe;
+  unsubCustomers: Unsubscribe;
   unsubEmployees!: Unsubscribe;
-  unsubSingleUser!: Unsubscribe;
+  unsubSingleCustomer!: Unsubscribe;
   unsubSingleEmployee!: Unsubscribe;
 
   constructor() {
-    this.unsubUsers = this.subCollection('users');
+    this.unsubCustomers = this.subCollection('customers');
   }
 
   ngOnDestroy() {
-    this.unsubUsers();
+    this.unsubCustomers();
   }
 
-  async addUser(user: User) {
-    await addDoc(this.getUsersRef(), user)
+  async addCustomer(user: Customer) {
+    await addDoc(this.getCustomersRef(), user)
       .catch((err) => {
         console.error(err);
       })
@@ -67,10 +66,10 @@ export class FirestoreService {
     await setDoc(doc(this.getEmployeesRef(), uid), this.getCleanJson(employee));
   }
 
-  async updateDoc(payload: User | Employee, docId: string) {
-    if (payload instanceof User) {
+  async updateDoc(payload: Customer | Employee, docId: string) {
+    if (payload instanceof Customer) {
       await updateDoc(
-        this.getSingleDocRef('users', docId),
+        this.getSingleDocRef('customers', docId),
         this.getCleanJson(payload)
       );
     } else {
@@ -82,7 +81,7 @@ export class FirestoreService {
   }
 
   startSubSingle(docId: string) {
-    this.unsubSingleUser = this.subSingleUser(docId);
+    this.unsubSingleCustomer = this.subSingleCustomer(docId);
   }
 
   startSubSingleEmployee(docId: string) {
@@ -94,35 +93,33 @@ export class FirestoreService {
   }
 
   subCollection(target: string) {
-    if (target == 'users') {
-      const q = query(this.getUsersRef(), limit(100));
+    if (target == 'customers') {
+      const q = query(this.getCustomersRef(), limit(100));
       return onSnapshot(q, (list) => {
-        this.users = [];
+        this.customers = [];
         list.forEach((element) => {
-          this.users.push(this.setUserObject(element.data(), element.id));
+          this.customers.push(this.setCustomerObject(element.data(), element.id));
         });
 
-        this.usersSubject.next(this.users);
+        this.customersSubject.next(this.customers);
       });
     } else {
       const q = query(this.getEmployeesRef(), limit(100));
       return onSnapshot(q, (list) => {
         this.employees = [];
         list.forEach((element) => {
-          this.employees.push(
-            this.setEmployeeObject(element.data())
-          );
+          this.employees.push(this.setEmployeeObject(element.data()));
         });
         this.employeesSubject.next(this.employees);
       });
     }
   }
 
-  subSingleUser(docId: string) {
-    return onSnapshot(this.getSingleDocRef('users', docId), (user) => {
-      this.singleUser = user.data();
-      console.log(this.singleUser);
-      this.singleUserSubject.next(this.singleUser);
+  subSingleCustomer(docId: string) {
+    return onSnapshot(this.getSingleDocRef('customers', docId), (customer) => {
+      this.singleCustomer = customer.data();
+      console.log(this.singleCustomer);
+      this.singleCustomerSubject.next(this.singleCustomer);
     });
   }
 
@@ -134,8 +131,8 @@ export class FirestoreService {
     });
   }
 
-  getUsersRef() {
-    return collection(this.firestore, 'users');
+  getCustomersRef() {
+    return collection(this.firestore, 'customers');
   }
 
   getEmployeesRef() {
@@ -146,7 +143,7 @@ export class FirestoreService {
     return doc(collection(this.firestore, colId), docId);
   }
 
-  setUserObject(obj: any, docId: string): User {
+  setCustomerObject(obj: any, docId: string): Customer {
     return {
       id: docId,
       firstName: obj.firstName || '',
@@ -179,8 +176,8 @@ export class FirestoreService {
     };
   }
 
-  getCleanJson(data: User | Employee): {} {
-    if (data instanceof User) {
+  getCleanJson(data: Customer | Employee): {} {
+    if (data instanceof Customer) {
       return {
         firstName: data.firstName,
         lastName: data.lastName,

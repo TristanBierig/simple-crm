@@ -26,11 +26,11 @@
 
     <div mat-card-avatar class="user-detail-header-image mr-16"></div>
     <div class="user-detail-title-wrapper">
-      <mat-card-title *ngIf="userDetail"
-        >{{ userDetail.firstName }}
-        {{ userDetail.lastName }}
+      <mat-card-title *ngIf="customerDetail"
+        >{{ customerDetail.firstName }}
+        {{ customerDetail.lastName }}
       </mat-card-title>
-      <mat-card-subtitle *ngIf="userDetail">{{ userDetail.email }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="customerDetail">{{ customerDetail.email }}</mat-card-subtitle>
     </div>
   </mat-card-header>
 </mat-card>
@@ -56,13 +56,13 @@
     <mat-card-content>
       <div>
         <mat-card-subtitle>Address</mat-card-subtitle>
-        <span *ngIf="userDetail">{{ userDetail.street }}</span>
+        <span *ngIf="customerDetail">{{ customerDetail.street }}</span>
         <br />
-        <span *ngIf="userDetail">{{ userDetail.zipCode }} {{ userDetail.city }}</span>
+        <span *ngIf="customerDetail">{{ customerDetail.zipCode }} {{ customerDetail.city }}</span>
       </div>
       <div>
         <mat-card-subtitle>Birthday</mat-card-subtitle>
-        <span *ngIf="userDetail">{{ userDetail.birthDate }}</span>
+        <span *ngIf="customerDetail">{{ customerDetail.birthDate }}</span>
       </div>
     </mat-card-content>
   </mat-card>

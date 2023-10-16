@@ -1,15 +1,17 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/app/models/user.class';
+import { Customer } from 'src/app/models/customer.class';
 import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 
 @Component({
-  selector: 'app-dialog-edit-user-projects',
-  templateUrl: './dialog-edit-user-projects.component.html',
-  styleUrls: ['./dialog-edit-user-projects.component.scss'],
+  selector: 'app-dialog-edit-customer-projects',
+  templateUrl: './dialog-edit-customer-projects.component.html',
+  styleUrls: ['./dialog-edit-customer-projects.component.scss'],
 })
-export class DialogEditUserProjectsComponent {
-  user: User = new User();
+export class DialogEditCustomerProjectsComponent {
+  customer: Customer;
+  customerId: string;
+
   loading: boolean = false;
 
   assignment!: string;
@@ -27,16 +29,17 @@ export class DialogEditUserProjectsComponent {
   ];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: User,
+    @Inject(MAT_DIALOG_DATA) public data: { content: Customer; docRef: string },
     private fireService: FirestoreService,
-    public dialogRef: MatDialogRef<DialogEditUserProjectsComponent>
+    public dialogRef: MatDialogRef<DialogEditCustomerProjectsComponent>
   ) {
-    this.user = data;
+    this.customer = new Customer(data.content);
+    this.customerId = data.docRef;
   }
 
   updateInfo() {
-    // this.fireService.updateUser(this.user);
-    // this.closeDialog();
+    this.fireService.updateDoc(this.customer, this.customer.id!);
+    this.closeDialog();
   }
 
   closeDialog(): void {

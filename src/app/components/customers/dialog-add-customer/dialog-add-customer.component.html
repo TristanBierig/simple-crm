@@ -1,20 +1,20 @@
-<h1 mat-dialog-title>Add User</h1>
+<h1 mat-dialog-title>Add Customer</h1>
 <div mat-dialog-content>
   <div class="dialog-name-input-wrapper">
     <mat-form-field class="mr-16" appearance="outline">
       <mat-label>First Name</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.firstName" matInput />
+      <input [disabled]="loading" [(ngModel)]="customer.firstName" matInput />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Last Name</mat-label>
-      <input [(ngModel)]="user.lastName" matInput />
+      <input [(ngModel)]="customer.lastName" matInput />
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Email</mat-label>
-      <input [(ngModel)]="user.email" matInput />
+      <input [(ngModel)]="customer.email" matInput />
     </mat-form-field>
   </div>
   
@@ -33,25 +33,25 @@
   <div>
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Street + House Number</mat-label>
-      <input [(ngModel)]="user.street" matInput />
+      <input [(ngModel)]="customer.street" matInput />
     </mat-form-field>
   </div>
 
   <div>
     <mat-form-field class="mr-16" appearance="outline">
       <mat-label>Zip code</mat-label>
-      <input [(ngModel)]="user.zipCode" matInput />
+      <input [(ngModel)]="customer.zipCode" matInput />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>City</mat-label>
-      <input [(ngModel)]="user.city" matInput />
+      <input [(ngModel)]="customer.city" matInput />
     </mat-form-field>
   </div>
 </div>
 
 <div mat-dialog-actions>
   <button (click)="closeDialog()" mat-button>Cancel</button>
-  <button (click)="addUser()" mat-button cdkFocusInitial>Save</button>
+  <button (click)="addCustomer()" mat-button cdkFocusInitial>Save</button>
 </div>
 
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

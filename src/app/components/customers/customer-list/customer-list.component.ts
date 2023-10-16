@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
-import { User } from 'src/app/models/user.class';
+import { DialogAddCustomerComponent } from '../dialog-add-customer/dialog-add-customer.component';
+import { Customer } from 'src/app/models/customer.class';
 import { FirestoreService } from '../../../services/firebase/firestore.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -13,9 +13,9 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
   styleUrls: ['./customer-list.component.scss'],
 })
 export class CustomerComponent implements AfterViewInit {
-  users!: User[];
+  customers!: Customer[];
   displayedColumns: string[] = ['name', 'email', 'birthday', 'street', 'city'];
-  dataSource: MatTableDataSource<User> = new MatTableDataSource<User>([]);
+  dataSource: MatTableDataSource<Customer> = new MatTableDataSource<Customer>([]);
 
   constructor(
     private fireService: FirestoreService,
@@ -26,8 +26,8 @@ export class CustomerComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    this.fireService.users$.subscribe((users) => {
-      this.dataSource.data = users;
+    this.fireService.customers$.subscribe((customers) => {
+      this.dataSource.data = customers;
     });
   }
 
@@ -44,10 +44,10 @@ export class CustomerComponent implements AfterViewInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddUserComponent);
+    const dialogRef = this.dialog.open(DialogAddCustomerComponent);
   }
 
-  getList(): User[] {
-    return this.fireService.users;
+  getList(): Customer[] {
+    return this.fireService.customers;
   }
 }

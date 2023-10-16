@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CustomerComponent } from './components/users/customer-list/customer-list.component';
-import { UserDetailComponent } from './components/users/user-detail/user-detail.component';
+import { CustomerComponent } from './components/customers/customer-list/customer-list.component';
+import { CustomerDetailComponent } from './components/customers/customer-detail/customer-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { AccountComponent } from './components/accounts/account/account.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'staff', component: StaffComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'user/:id', component: UserDetailComponent },
+  { path: 'customer/:id', component: CustomerDetailComponent },
 ];
 
 @NgModule({
