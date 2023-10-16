@@ -4,7 +4,7 @@
 @include mat.core();
 
 $my-primary: mat.define-palette(mat.$teal-palette);
-$my-accent: mat.define-palette(mat.$deep-purple-palette);
+$my-accent: mat.define-palette(mat.$deep-purple-palette, 300);
 
 $my-theme-dark: mat.define-dark-theme((color: (primary: $my-primary,
                 accent: $my-accent,
@@ -21,12 +21,12 @@ body {
 }
 
 .dark-theme {
-    @include mat.all-component-themes($my-theme-dark);
+    @include mat.all-component-colors($my-theme-dark);
     @include list.theme($my-theme-dark);
 }
 
 .light-theme {
-    @include mat.all-component-themes($my-theme-light);
+    @include mat.all-component-colors($my-theme-light);
     @include list.theme($my-theme-light);
 }
 
@@ -57,6 +57,10 @@ input:-webkit-autofill:active {
     margin-bottom: 16px;
 }
 
+.mt-16 {
+    margin-top: 16px;
+}
+
 .pt-8 {
     padding-top: 8px;
 }
@@ -67,4 +71,14 @@ input:-webkit-autofill:active {
 
 .center-text {
     justify-content: center;
+}
+
+.pin-top-right {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.relative {
+    position: relative;
 }

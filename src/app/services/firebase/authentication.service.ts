@@ -1,34 +1,57 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, OnInit } from '@angular/core';
 import {
   Auth,
   signInWithEmailAndPassword,
   user,
-  User,
   signOut,
+  sendPasswordResetEmail,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
 } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
+import { FirestoreService } from './firestore.service';
+import { Employee } from 'src/app/models/employee.class';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthenticationService implements OnInit {
   isLoggedIn: boolean = false;
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
-  userSubscription: any;
+  currentUserId: any;
 
-  currentUser: any;
-
-  constructor() {
-    this.userSubscription = this.user$.subscribe((aUser: User | null) => {
-      //handle user state changes here. Note, that user will be null if there is no currently logged in user.
-      console.log(aUser);
-      this.currentUser = aUser;
+  constructor(private fireService: FirestoreService) {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        this.currentUserId = uid;
+        this.fireService.startSubSingleEmployee(this.currentUserId);
+        console.log('Logged in as: ', user);
+      } else {
+        // User is signed out
+        console.log('Logged out user: ', user);
+      }
     });
+  }
+
+  ngOnInit(): void {}
+
+  createNewAccount(params: any): Observable<any> {
+    return from(
+      createUserWithEmailAndPassword(
+        this.auth,
+        params.email,
+        params.password
+      ).then((cred) => {
+        const employee = new Employee(cred.user, params);
+        const uid = cred.user.uid;
+        this.fireService.setDoc(uid, employee);
+      })
+    );
   }
 
   signIn(params: SignIn): Observable<any> {
@@ -37,8 +60,6 @@ export class AuthenticationService {
         (userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log('Erfolgreich eingeloggt: ', user);
-
           this.isLoggedIn = true;
           this.isLoggedInSubject.next(this.isLoggedIn);
         }
@@ -47,8 +68,15 @@ export class AuthenticationService {
   }
 
   signOut() {
-    signOut(this.auth).then(() => {
-    });
+    signOut(this.auth);
+  }
+
+  recoverPassword(email: string): Observable<void> {
+    return from(
+      sendPasswordResetEmail(this.auth, email).then(() => {
+        console.log('reset emnail has been send');
+      })
+    );
   }
 }
 

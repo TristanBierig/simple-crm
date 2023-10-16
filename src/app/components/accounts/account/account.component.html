@@ -1,0 +1,92 @@
+<mat-card *ngIf="currentUser" class="account-profile-card">
+  <mat-card-header>
+    <div mat-card-avatar class="account-profile-header-image"></div>
+    <mat-card-title
+      >{{ currentUser.firstName }} {{ currentUser.lastName }}</mat-card-title
+    >
+    <mat-card-subtitle>{{ currentUser.email }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="mt-16 main-card-content">
+    <div class="profile-info-column-container">
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Whole Name</mat-card-subtitle>
+        <span>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
+      </div>
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Role</mat-card-subtitle>
+        <span>{{ currentUser.role }}</span>
+      </div>
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Region</mat-card-subtitle>
+        <span>{{ currentUser.region }}</span>
+      </div>
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Gender</mat-card-subtitle>
+        <span>{{ currentUser.gender }}</span>
+      </div>
+    </div>
+
+    <div class="profile-info-column-container">
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Display Name</mat-card-subtitle>
+        <span>{{ currentUser.displayName }}</span>
+      </div>
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Timezone</mat-card-subtitle>
+        <span>{{ currentUser.timeZone }}</span>
+      </div>
+      <div class="profile-info-wrapper">
+        <mat-card-subtitle>Language</mat-card-subtitle>
+        <span>{{ currentUser.language }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <div class="pin-top-right">
+    <button (click)="openDialog('main')" color="accent" mat-flat-button>Edit</button>
+  </div>
+</mat-card>
+
+<!-- Email Card -->
+<mat-card class="relative">
+  <mat-card-header>
+    <mat-card-title>Email address</mat-card-title>
+    <mat-card-subtitle
+      >Here you can save all emails you are using and want to be contacted
+      by</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
+      <mat-icon color="primary">mail</mat-icon>
+      <span>{{ currentUser.email }}</span>
+    </div>
+    <div class="pin-top-right">
+      <button (click)="openDialog('email')" mat-mini-fab color="accent">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- Phone Card -->
+<mat-card class="relative">
+  <mat-card-header>
+    <mat-card-title>Phone number</mat-card-title>
+    <mat-card-subtitle
+      >Save all your phone numbers you can be reached by</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
+      <mat-icon color="primary">call</mat-icon>
+      <span>{{ currentUser.phone }}</span>
+    </div>
+    <div class="pin-top-right">
+      <button (click)="openDialog('phone')" mat-mini-fab color="accent">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

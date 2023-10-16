@@ -1,0 +1,100 @@
+<mat-card class="user-detail-card-main">
+  <mat-card-header>
+    <div class="btn-wrapper pin-top-right">
+      <button
+        class="mr-16"
+        [routerLink]="'/customers'"
+        mat-stroked-button
+        extended
+        color="accent"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        Back to list
+      </button>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="editMenuTop"
+        aria-label="Icon button with a vertical three dot icon"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+
+    <mat-menu #editMenuTop="matMenu">
+      <button (click)="openMainEdit()" mat-menu-item>Edit</button>
+    </mat-menu>
+
+    <div mat-card-avatar class="user-detail-header-image mr-16"></div>
+    <div class="user-detail-title-wrapper">
+      <mat-card-title *ngIf="customerDetail"
+        >{{ customerDetail.firstName }}
+        {{ customerDetail.lastName }}
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="customerDetail">{{ customerDetail.email }}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+</mat-card>
+
+<div class="user-detail-second-row">
+  <mat-card class="user-detail-card">
+    <button
+      class="pin-top-right"
+      mat-icon-button
+      [matMenuTriggerFor]="editMenuPersonal"
+      aria-label="Icon button with a vertical three dot icon"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #editMenuPersonal="matMenu">
+      <button (click)="openPersonalEdit()" mat-menu-item>Edit</button>
+    </mat-menu>
+
+    <mat-card-header class="center-text">
+      <mat-card-title> Personal data </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div>
+        <mat-card-subtitle>Address</mat-card-subtitle>
+        <span *ngIf="customerDetail">{{ customerDetail.street }}</span>
+        <br />
+        <span *ngIf="customerDetail">{{ customerDetail.zipCode }} {{ customerDetail.city }}</span>
+      </div>
+      <div>
+        <mat-card-subtitle>Birthday</mat-card-subtitle>
+        <span *ngIf="customerDetail">{{ customerDetail.birthDate }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="user-detail-card">
+    <button
+      class="pin-top-right"
+      mat-icon-button
+      [matMenuTriggerFor]="editMenuProjects"
+      aria-label="Icon button with a vertical three dot icon"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #editMenuProjects="matMenu">
+      <button (click)="openProjectsEdit()" mat-menu-item>Edit</button>
+    </mat-menu>
+
+    <mat-card-header class="center-text">
+      <mat-card-title> Projects </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div>
+        <mat-card-subtitle>Assignments</mat-card-subtitle>
+        <span>Project-X v2.3</span>
+      </div>
+      <div>
+        <mat-card-subtitle>Role</mat-card-subtitle>
+        <mat-chip-listbox>
+          <mat-chip highlighted color="accent"> Marketing </mat-chip>
+        </mat-chip-listbox>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

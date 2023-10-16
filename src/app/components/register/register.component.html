@@ -20,15 +20,45 @@
 
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>Register</mat-card-title>
     <mat-card-subtitle
-      >Enter with your account or create a new one</mat-card-subtitle
+      >Create a new account to work in the CRM!</mat-card-subtitle
     >
   </mat-card-header>
   <mat-card-content>
     <mat-divider></mat-divider>
+    <form [formGroup]="registerForm">
+      <!-- Names -->
+      <div class="register-name-wrapper">
+        <mat-form-field appearance="outline">
+          <mat-label>Firstname</mat-label>
+          <input
+            formControlName="firstName"
+            type="text"
+            matInput
+            placeholder="Firstname"
+            autocomplete="given-name"
+          />
+          <mat-error *ngIf="firstName?.invalid && firstName?.touched">{{
+            getNameErrMsg()
+          }}</mat-error>
+        </mat-form-field>
 
-    <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input
+            formControlName="lastName"
+            type="text"
+            matInput
+            placeholder="Lastname"
+            autocomplete="family-name"
+          />
+          <mat-error *ngIf="lastName?.invalid && lastName?.touched">{{
+            getNameErrMsg()
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+
       <!-- Email Input -->
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
@@ -39,8 +69,11 @@
           placeholder="Ex: pat@example.com"
           autocomplete="email"
         />
-        <mat-error *ngIf="email?.invalid && email?.touched">{{
-          getEmailErrorMsg()
+        <mat-error *ngIf="email?.hasError('required') && email?.touched">
+          {{ getEmailErrMsgRequired() }}
+        </mat-error>
+        <mat-error *ngIf="email?.hasError('email') && email?.touched">{{
+          getEmailErrMsgFormat()
         }}</mat-error>
       </mat-form-field>
 
@@ -67,40 +100,33 @@
           }}</mat-icon>
         </button>
         <mat-error *ngIf="password?.invalid && password?.touched">{{
-          getPasswordErrorMsg()
+          getPasswordErrMsg()
         }}</mat-error>
       </mat-form-field>
 
       <div>
         <!-- Buttons Container -->
         <button
-          (click)="login()"
+          (click)="register()"
           mat-raised-button
           type="submit"
           color="primary"
-          [disabled]="!loginForm.valid || isLoading"
+          [disabled]="!registerForm.valid || isLoading"
         >
-          LOGIN
+          Create new Account
         </button>
-        <button routerLink="register" mat-stroked-button color="primary">
-          REGISTER
-        </button>
-        <button
-          color="accent"
-          mat-button
-          [disabled]="!loginForm.get('email')?.valid"
-          (click)="recoverPassword()"
-          *ngIf="!isRecoveringPassword"
-        >
-          Reset password
-        </button>
-        <mat-spinner *ngIf="isRecoveringPassword" color="accent"></mat-spinner>
       </div>
     </form>
 
     <mat-divider></mat-divider>
   </mat-card-content>
-  <mat-card-actions></mat-card-actions>
+  <mat-card-actions>
+    <!-- Back Btn -->
+
+    <button routerLink="/" color="accent" mat-button>
+      <mat-icon>arrow_back</mat-icon>Back to Login
+    </button>
+  </mat-card-actions>
   <mat-card-footer>
     <mat-progress-bar
       *ngIf="isLoading"

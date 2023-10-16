@@ -1,0 +1,25 @@
+mat-panel-description {
+    gap: 8px;
+}
+
+.list-profile-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .profile-img {
+        background-image: url('../../../assets/images/portraits/default.png');
+        background-size: cover;
+        margin: 0;
+        height: 32px;
+        width: 32px;
+    }
+}
+
+.email-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+    width: max-content !important;
+}

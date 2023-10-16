@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserComponent } from './components/users/user-list/user-list.component';
-import { DialogAddUserComponent } from './components/users/dialog-add-user/dialog-add-user.component';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -17,25 +15,42 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { MaterialModule } from './custom-modules/material.module';
 
-import { UserDetailComponent } from './components/users/user-detail/user-detail.component';
-import { DialogEditUserComponent } from './components/users/dialog-edit-user/dialog-edit-user.component';
-import { DialogEditUserPersonalComponent } from './components/users/dialog-edit-user-personal/dialog-edit-user-personal.component';
-import { DialogEditUserProjectsComponent } from './components/users/dialog-edit-user-projects/dialog-edit-user-projects.component';
-import { LoginComponent } from './components/login/login.component';
+import { CustomerComponent } from './components/customers/customer-list/customer-list.component';
+import { CustomerDetailComponent } from './components/customers/customer-detail/customer-detail.component';
+import { DialogAddCustomerComponent } from './components/customers/dialog-add-customer/dialog-add-customer.component';
+import { DialogEditCustomerComponent } from './components/customers/dialog-edit-customer/dialog-edit-customer.component';
+import { DialogEditCustomerPersonalComponent } from './components/customers/dialog-edit-customer-personal/dialog-edit-customer-personal.component';
+import { DialogEditCustomerProjectsComponent } from './components/customers/dialog-edit-customer-projects/dialog-edit-customer-projects.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
+import { StaffComponent } from './components/staff/staff.component';
+
+import { AccountComponent } from './components/accounts/account/account.component';
+import { AccountEditDialogComponent } from './components/accounts/account-edit-dialog/account-edit-dialog.component';
+import { AccountEditEmailDialogComponent } from './components/accounts/account-edit-email-dialog/account-edit-email-dialog.component';
+import { AccountEditPhoneDialogComponent } from './components/accounts/account-edit-phone-dialog/account-edit-phone-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserComponent,
-    DialogAddUserComponent,
-    UserDetailComponent,
-    DialogEditUserComponent,
-    DialogEditUserProjectsComponent,
-    DialogEditUserPersonalComponent,
+    CustomerComponent,
+    DialogAddCustomerComponent,
+    CustomerDetailComponent,
+    DialogEditCustomerComponent,
+    DialogEditCustomerProjectsComponent,
+    DialogEditCustomerPersonalComponent,
     LoginComponent,
+    RegisterComponent,
+    StaffComponent,
+    AccountComponent,
+    AccountEditDialogComponent,
+    AccountEditEmailDialogComponent,
+    AccountEditPhoneDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +58,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

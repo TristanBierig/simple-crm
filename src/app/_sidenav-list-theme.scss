@@ -13,10 +13,10 @@
         li:hover {
             background-color: mat.get-color-from-palette($primary-palette, 400);
         }
+    }
 
-        li:focus {
-            background-color: mat.get-color-from-palette($primary-palette, 500);
-        }
+    .sidenav-active-link {
+        background-color: mat.get-color-from-palette($primary-palette, 500);
     }
 }
 

@@ -4,7 +4,6 @@ import { AuthenticationService } from 'src/app/services/firebase/authentication.
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   isLoading: boolean = false;
+  isRecoveringPassword: boolean = false;
   public ishiddenPw: boolean = true;
 
   get email() {
@@ -43,17 +43,35 @@ export class LoginComponent {
           password: this.loginForm.value.password!,
         })
         .subscribe({
-          next: () => {},
           error: () => {
-            const errorMsg = 'There was an error with your E-Mail/Password combination. Please try again.';
+            const errorMsg =
+              'There was an error with your E-Mail/Password combination. Please try again.';
             this.isLoading = false;
-            this.snackBar.open(errorMsg, 'OK', { duration: 5000 });  
+            this.snackBar.open(errorMsg, 'OK', { duration: 5000 });
           },
           complete: () => {
             this.router.navigate(['dashboard']);
           },
         });
-    }, 1500);
+    }, 1000);
+  }
+
+  recoverPassword() {
+    this.isRecoveringPassword = true;
+    this.authService.recoverPassword(this.loginForm.value.email!).subscribe({
+      error: () => {
+        const errorMsg =
+          'There was an error with the given email. Please try again!';
+        this.isRecoveringPassword = false;
+        this.snackBar.open(errorMsg, 'OK', { duration: 5000 });
+      },
+      complete: () => {
+        const errorMsg =
+          'We sent you an email! Follow the link to reset your Password.';
+        this.isRecoveringPassword = false;
+        this.snackBar.open(errorMsg, 'OK', { duration: 5000 });
+      },
+    });
   }
 
   getEmailErrorMsg(): string {

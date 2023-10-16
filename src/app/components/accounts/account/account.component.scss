@@ -1,0 +1,38 @@
+:host {
+    position: relative;
+}
+
+.account-profile-header-image {
+    background-image: url('../../../../assets/images/portraits/default.png');
+    background-size: cover;
+}
+
+.profile-info-wrapper {
+    span {
+        font-size: 1.15rem;
+    }
+}
+
+mat-card {
+    margin-bottom: 32px;
+}
+
+.main-card-content {
+    display: flex;
+    gap: 128px;
+    padding: 16px;
+}
+
+.profile-info-column-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.profile-email-wrapper {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 8px;
+    cursor: pointer;
+}
