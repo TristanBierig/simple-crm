@@ -158,9 +158,12 @@ export class FirestoreService {
       street: obj.street || '',
       zipCode: obj.zipCode || 0,
       city: obj.city || '',
-      leadOwner: obj.leadOwner || '',
-      leadStartDate: obj.leadStartDate || '',
-      leadStatus: obj.leadStatus || '',
+      leadInfo: {
+        leadOwner: obj.leadInfo.leadOwner || '',
+        leadStartDate: obj.leadInfo.leadStartDate || '',
+        leadStatus: obj.leadInfo.leadStatus || '',
+        leadValue: obj.leadInfo.leadValue
+      }
     };
   }
 
@@ -195,9 +198,12 @@ export class FirestoreService {
         street: data.street,
         zipCode: data.zipCode,
         city: data.city,
-        leadOwner: data.leadOwner,
-        leadStartDate: data.leadStartDate,
-        leadStatus: data.leadStatus,
+        leadInfo: {
+          leadOwner: data.leadInfo.leadOwner,
+          leadStartDate: data.leadInfo.leadStartDate,
+          leadStatus: data.leadInfo.leadStatus,
+          leadValue: data.leadInfo.leadValue,
+        }
       };
     } else {
       return {

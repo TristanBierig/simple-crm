@@ -27,7 +27,7 @@ export class CustomerComponent implements AfterViewInit {
 
   ngOnInit() {
     this.fireService.customers$.subscribe((customers) => {
-      this.dataSource.data = customers;
+      this.dataSource.data = customers;      
     });
   }
 

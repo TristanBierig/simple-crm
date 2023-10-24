@@ -37,15 +37,17 @@ export class DialogAddCustomerComponent {
       street: this.customer.street || '',
       zipCode: this.customer.zipCode,
       city: this.customer.city || '',
-      leadOwner: this.employee.displayName || '',
-      leadStartDate:
-        new Date().toLocaleString('de-DE', {
+      leadInfo: {
+        leadOwner: this.employee.displayName || '',
+        leadStartDate: new Date().toLocaleString('de-DE', {
           weekday: undefined,
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         }) || '',
-      leadStatus: 'pending' || '',
+        leadStatus: 'pending' || '',
+        leadValue: '2000',
+      },
     };
     await this.fireService.addCustomer(customer);
     this.loading = false;

@@ -7,10 +7,12 @@ export class Customer {
   street: string;
   zipCode: number;
   city: string;
-  leadStatus: 'lost' | 'pending' | 'fullfilled';
-  leadOwner: string;
-  leadStartDate: string;
-
+  leadInfo: {
+    leadStatus: 'lost' | 'pending' | 'fullfilled';
+    leadOwner: string;
+    leadValue: string;
+    leadStartDate: string;
+  };
   constructor(obj?: any) {
     this.id = obj ? obj.id : '';
     this.firstName = obj ? obj.firstName : '';
@@ -20,8 +22,11 @@ export class Customer {
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';
-    this.leadStatus = obj ? obj.leadStatus : '';
-    this.leadOwner = obj ? obj.leadOwner : '';
-    this.leadStartDate = obj ? obj.leadStartDate : '';
+    this.leadInfo = {
+      leadStatus: obj ? obj.leadInfo.leadStatus : '',
+      leadOwner: obj ? obj.leadInfo.leadOwner : '',
+      leadStartDate: obj ? obj.leadInfo.leadStartDate : '',
+      leadValue: obj ? obj.leadInfo.leadValue : '',
+    };
   }
 }
