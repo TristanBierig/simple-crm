@@ -30,7 +30,9 @@
         >{{ customerDetail.firstName }}
         {{ customerDetail.lastName }}
       </mat-card-title>
-      <mat-card-subtitle *ngIf="customerDetail">{{ customerDetail.email }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="customerDetail">{{
+        customerDetail.email
+      }}</mat-card-subtitle>
     </div>
   </mat-card-header>
 </mat-card>
@@ -58,7 +60,9 @@
         <mat-card-subtitle>Address</mat-card-subtitle>
         <span *ngIf="customerDetail">{{ customerDetail.street }}</span>
         <br />
-        <span *ngIf="customerDetail">{{ customerDetail.zipCode }} {{ customerDetail.city }}</span>
+        <span *ngIf="customerDetail"
+          >{{ customerDetail.zipCode }} {{ customerDetail.city }}</span
+        >
       </div>
       <div>
         <mat-card-subtitle>Birthday</mat-card-subtitle>
@@ -81,18 +85,32 @@
     </mat-menu>
 
     <mat-card-header class="center-text">
-      <mat-card-title> Projects </mat-card-title>
+      <mat-card-title> Lead Info </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
       <div>
-        <mat-card-subtitle>Assignments</mat-card-subtitle>
-        <span>Project-X v2.3</span>
+        <mat-card-subtitle>Title</mat-card-subtitle>
+        <span *ngIf="customerDetail">{{
+          customerDetail.leadInfo.leadTitle
+        }}</span>
       </div>
       <div>
-        <mat-card-subtitle>Role</mat-card-subtitle>
+        <mat-card-subtitle>Status</mat-card-subtitle>
         <mat-chip-listbox>
-          <mat-chip highlighted color="accent"> Marketing </mat-chip>
+          <mat-chip
+            *ngIf="customerDetail"
+            highlighted
+            [color]="
+              customerDetail.leadInfo.leadStatus == 'lost'
+                ? 'warn'
+                : customerDetail.leadInfo.leadStatus == 'success'
+                ? 'primary'
+                : 'accent'
+            "
+          >
+            {{ customerDetail.leadInfo.leadStatus }}
+          </mat-chip>
         </mat-chip-listbox>
       </div>
     </mat-card-content>

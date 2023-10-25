@@ -162,7 +162,8 @@ export class FirestoreService {
         leadOwner: obj.leadInfo.leadOwner || '',
         leadStartDate: obj.leadInfo.leadStartDate || '',
         leadStatus: obj.leadInfo.leadStatus || '',
-        leadValue: obj.leadInfo.leadValue
+        leadValue: obj.leadInfo.leadValue || '',
+        leadTitle: obj.leadInfo.leadTitle || '',
       }
     };
   }

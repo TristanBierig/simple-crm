@@ -46,7 +46,8 @@ export class DialogAddCustomerComponent {
           day: 'numeric',
         }) || '',
         leadStatus: 'pending' || '',
-        leadValue: '2000',
+        leadValue: this.customer.leadInfo.leadValue,
+        leadTitle: this.customer.leadInfo.leadTitle,
       },
     };
     await this.fireService.addCustomer(customer);

@@ -8,10 +8,11 @@ export class Customer {
   zipCode: number;
   city: string;
   leadInfo: {
-    leadStatus: 'lost' | 'pending' | 'fullfilled';
+    leadStatus: 'lost' | 'pending' | 'success';
     leadOwner: string;
     leadValue: string;
     leadStartDate: string;
+    leadTitle: string;
   };
   constructor(obj?: any) {
     this.id = obj ? obj.id : '';
@@ -27,6 +28,7 @@ export class Customer {
       leadOwner: obj ? obj.leadInfo.leadOwner : '',
       leadStartDate: obj ? obj.leadInfo.leadStartDate : '',
       leadValue: obj ? obj.leadInfo.leadValue : '',
+      leadTitle: obj ? obj.leadInfo.leadTitle : '',
     };
   }
 }
