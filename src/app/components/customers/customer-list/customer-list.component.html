@@ -1,3 +1,7 @@
+<mat-form-field>
+  <input (keyup)="applyFilter($event)" matInput placeholder="Filter name">
+</mat-form-field>
+
 <table
   mat-table
   [dataSource]="dataSource"

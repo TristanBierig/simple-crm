@@ -11,7 +11,7 @@ export class Customer {
   leadInfo: {
     leadStatus: 'lost' | 'pending' | 'success';
     leadOwner: string;
-    leadValue: string;
+    leadValue: number;
     leadStartDate: string;
     leadTitle: string;
   };
@@ -29,7 +29,7 @@ export class Customer {
       leadStatus: obj ? obj.leadInfo.leadStatus : '',
       leadOwner: obj ? obj.leadInfo.leadOwner : '',
       leadStartDate: obj ? obj.leadInfo.leadStartDate : '',
-      leadValue: obj ? obj.leadInfo.leadValue : '',
+      leadValue: obj ? obj.leadInfo.leadValue : null,
       leadTitle: obj ? obj.leadInfo.leadTitle : '',
     };
   }

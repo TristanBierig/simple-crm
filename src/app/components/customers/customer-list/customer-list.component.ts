@@ -8,6 +8,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subject, takeUntil } from 'rxjs';
 
+
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
@@ -50,6 +51,10 @@ export class CustomerComponent implements AfterViewInit {
   ngOnDestroy() {
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();
+  }
+
+  applyFilter(filter: KeyboardEvent) {
+    this.dataSource.filter = (filter.target as HTMLInputElement).value.trim().toLowerCase();
   }
 
   announceSortChange(sortState: Sort) {
