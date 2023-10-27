@@ -47,6 +47,19 @@
       <input [(ngModel)]="customer.city" matInput />
     </mat-form-field>
   </div>
+
+  <h2>Lead info</h2>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Lead title</mat-label>
+      <input [(ngModel)]="customer.leadInfo.leadTitle" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Lead value</mat-label>
+      <input [(ngModel)]="customer.leadInfo.leadValue" matInput>
+      <mat-icon matSuffix>euro</mat-icon>
+    </mat-form-field>
+  </div>
 </div>
 
 <div mat-dialog-actions>
