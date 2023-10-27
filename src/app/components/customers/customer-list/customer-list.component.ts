@@ -6,6 +6,7 @@ import { FirestoreService } from '../../../services/firebase/firestore.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-customer-list',
@@ -15,7 +16,11 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 export class CustomerComponent implements AfterViewInit {
   customers!: Customer[];
   displayedColumns: string[] = ['name', 'email', 'birthday', 'street', 'city'];
-  dataSource: MatTableDataSource<Customer> = new MatTableDataSource<Customer>([]);
+  dataSource: MatTableDataSource<Customer> = new MatTableDataSource<Customer>(
+    []
+  );
+
+  private componentIsDestroyed$ = new Subject<boolean>();
 
   constructor(
     private fireService: FirestoreService,
@@ -26,13 +31,22 @@ export class CustomerComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
-    this.fireService.customers$.subscribe((customers) => {
-      this.dataSource.data = customers;
-    });
+    console.log(this.fireService.customers$);
+    
+    this.fireService.customers$
+      .pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe((customers) => {
+        this.dataSource.data = customers;
+      });
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
   }
 
   announceSortChange(sortState: Sort) {
