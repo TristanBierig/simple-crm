@@ -39,9 +39,11 @@
 
     mat-card-content {
         display: flex;
+        flex-direction: column;
         justify-content: space-around;
-        gap: 16px;
+        gap: 32px;
         margin-top: 16px;
+        text-align: center;
 
         mat-card-subtitle {
             margin-bottom: 8px;
@@ -53,4 +55,9 @@
 .user-detail-second-row {
     display: flex;
     gap: 16px;
+}
+
+.lead__row-wrapper {
+    display: flex;
+    justify-content: space-around;
 }

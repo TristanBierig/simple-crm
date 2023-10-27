@@ -36,45 +36,62 @@
     </td>
   </ng-container>
 
-  <!-- Birthday Column -->
-  <ng-container matColumnDef="birthday">
+  <!-- Owner Column -->
+  <ng-container matColumnDef="owner">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
-      sortActionDescription="Sort by birthday"
+      sortActionDescription="Sort by owner"
     >
-      Birthday
-    </th>
-    <td mat-cell *matCellDef="let customer">{{ customer.birthDate }}</td>
-  </ng-container>
-
-  <!-- Street Column -->
-  <ng-container matColumnDef="street">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by street"
-    >
-      Street
-    </th>
-    <td mat-cell *matCellDef="let customer">{{ customer.street }}</td>
-  </ng-container>
-
-  <!-- City Column -->
-  <ng-container matColumnDef="city">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      mat-sort-header
-      sortActionDescription="Sort by city"
-    >
-      City
+      Owner
     </th>
     <td mat-cell *matCellDef="let customer">
-      {{ customer.zipCode }}
-      {{ customer.city }}
+      {{ customer.leadInfo.leadOwner }}
+    </td>
+  </ng-container>
+
+  <!-- Value Column -->
+  <ng-container matColumnDef="value">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by value"
+    >
+      Value
+    </th>
+    <td mat-cell *matCellDef="let customer">
+      {{ customer.leadInfo.leadValue }}
+    </td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by status"
+    >
+      Status
+    </th>
+    <td mat-cell *matCellDef="let customer">
+      <mat-chip-listbox>
+        <mat-chip
+          *ngIf="customer"
+          highlighted
+          [color]="
+            customer.leadInfo.leadStatus == 'lost'
+              ? 'warn'
+              : customer.leadInfo.leadStatus == 'success'
+              ? 'primary'
+              : 'accent'
+          "
+        >
+          {{ customer.leadInfo.leadStatus }}
+        </mat-chip>
+      </mat-chip-listbox>
     </td>
   </ng-container>
 

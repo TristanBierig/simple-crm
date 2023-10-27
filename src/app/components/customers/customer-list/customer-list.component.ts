@@ -15,7 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class CustomerComponent implements AfterViewInit {
   customers!: Customer[];
-  displayedColumns: string[] = ['name', 'email', 'birthday', 'street', 'city'];
+  displayedColumns: string[] = ['name', 'email', 'owner', 'value', 'status'];
   dataSource: MatTableDataSource<Customer> = new MatTableDataSource<Customer>(
     []
   );
@@ -36,7 +36,9 @@ export class CustomerComponent implements AfterViewInit {
     this.fireService.customers$
       .pipe(takeUntil(this.componentIsDestroyed$))
       .subscribe((customers) => {
+        
         this.dataSource.data = customers;
+        console.log(this.dataSource.data);
       });
   }
 

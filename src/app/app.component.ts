@@ -12,7 +12,7 @@ import { FirestoreService } from './services/firebase/firestore.service';
 })
 export class AppComponent implements OnInit {
   title = 'simple-crm';
-  isLoggedIn: boolean = false; // Should be false; For dev can switch
+  isLoggedIn: boolean = true; // Should be false; For dev can switch
   isAccountInfoComplete: boolean = false;
 
   constructor(
@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
     private fireService: FirestoreService,
     private router: Router
   ) {
-    this.authService.isLoggedIn$.subscribe((data) => {
-      this.isLoggedIn = data;
-    });
+    // this.authService.isLoggedIn$.subscribe((data) => {
+    //   this.isLoggedIn = data;
+    // });
   }
 
   ngOnInit() {
