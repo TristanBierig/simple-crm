@@ -6,7 +6,7 @@
   class="mat-elevation-z8"
 >
   <!-- Name Column -->
-  <ng-container matColumnDef="name">
+  <ng-container matColumnDef="firstName">
     <th
       mat-header-cell
       *matHeaderCellDef
@@ -37,7 +37,7 @@
   </ng-container>
 
   <!-- Owner Column -->
-  <ng-container matColumnDef="owner">
+  <ng-container matColumnDef="leadInfo.leadOwner">
     <th
       mat-header-cell
       *matHeaderCellDef
@@ -52,7 +52,7 @@
   </ng-container>
 
   <!-- Value Column -->
-  <ng-container matColumnDef="value">
+  <ng-container matColumnDef="leadInfo.leadValue">
     <th
       mat-header-cell
       *matHeaderCellDef
@@ -62,12 +62,12 @@
       Value
     </th>
     <td mat-cell *matCellDef="let customer">
-      {{ customer.leadInfo.leadValue }}
+      {{ customer.leadInfo.leadValue | currency : 'EUR' }} 
     </td>
   </ng-container>
 
   <!-- Status Column -->
-  <ng-container matColumnDef="status">
+  <ng-container matColumnDef="leadInfo.leadStatus">
     <th
       mat-header-cell
       *matHeaderCellDef

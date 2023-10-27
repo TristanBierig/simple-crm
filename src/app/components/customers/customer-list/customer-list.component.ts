@@ -15,7 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class CustomerComponent implements AfterViewInit {
   customers!: Customer[];
-  displayedColumns: string[] = ['name', 'email', 'owner', 'value', 'status'];
+  displayedColumns: string[] = ['firstName', 'email', 'leadInfo.leadOwner', 'leadInfo.leadValue', 'leadInfo.leadStatus'];
   dataSource: MatTableDataSource<Customer> = new MatTableDataSource<Customer>(
     []
   );
@@ -38,7 +38,8 @@ export class CustomerComponent implements AfterViewInit {
       .subscribe((customers) => {
         
         this.dataSource.data = customers;
-        console.log(this.dataSource.data);
+        this.dataSource.sortingDataAccessor = this.pathDataAccessor;
+        console.log(this.dataSource);
       });
   }
 
@@ -63,7 +64,10 @@ export class CustomerComponent implements AfterViewInit {
     const dialogRef = this.dialog.open(DialogAddCustomerComponent);
   }
 
-  getList(): Customer[] {
-    return this.fireService.customers;
+  pathDataAccessor(item: any, path: string): any {
+    return path.split('.')
+      .reduce((accumulator: any, key: string) => {
+        return accumulator ? accumulator[key] : undefined;
+      }, item);
   }
 }

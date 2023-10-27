@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDE from '@angular/common/locales/de';
+registerLocaleData(localeDE, 'de');
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -65,7 +69,9 @@ import { AccountEditPhoneDialogComponent } from './components/accounts/account-e
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-  providers: [],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'de-DE' }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
