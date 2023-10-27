@@ -27,9 +27,16 @@
         >{{ customerDetail.firstName }}
         {{ customerDetail.lastName }}
       </mat-card-title>
-      <mat-card-subtitle *ngIf="customerDetail">{{
-        customerDetail.email
-      }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="customerDetail">
+        <a href="mailto:{{ customerDetail.email }}">{{
+          customerDetail.email
+        }}</a>
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="customerDetail">
+        <a href="tel:{{ customerDetail.phone }}">{{
+          customerDetail.phone
+        }}</a>
+      </mat-card-subtitle>
     </div>
   </mat-card-header>
 </mat-card>
@@ -84,13 +91,14 @@
     </mat-card-header>
 
     <mat-card-content>
+      <div>
+        <mat-card-subtitle>Title</mat-card-subtitle>
+        <span *ngIf="customerDetail">{{
+          customerDetail.leadInfo.leadTitle
+        }}</span>
+      </div>
+
       <div class="lead__row-wrapper">
-        <div>
-          <mat-card-subtitle>Title</mat-card-subtitle>
-          <span *ngIf="customerDetail">{{
-            customerDetail.leadInfo.leadTitle
-          }}</span>
-        </div>
         <div>
           <mat-card-subtitle>Owner</mat-card-subtitle>
           <span *ngIf="customerDetail">{{
@@ -109,8 +117,8 @@
         <div>
           <mat-card-subtitle>Value</mat-card-subtitle>
           <span *ngIf="customerDetail"
-            >{{ customerDetail.leadInfo.leadValue }} €</span
-          >
+            >{{ customerDetail.leadInfo.leadValue | currency : "EUR" }}
+          </span>
         </div>
         <div>
           <mat-card-subtitle>Status</mat-card-subtitle>

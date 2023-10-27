@@ -28,6 +28,7 @@ export class DialogAddCustomerComponent {
       firstName: this.customer.firstName || '',
       lastName: this.customer.lastName || '',
       email: this.customer.email || '',
+      phone: this.customer.phone,
       birthDate: this.birthDate.toLocaleString('de-DE', {
         weekday: undefined,
         year: 'numeric',

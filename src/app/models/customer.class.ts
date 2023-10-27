@@ -3,7 +3,8 @@ export class Customer {
   firstName: string;
   lastName: string;
   email: string;
-  birthDate: string;
+  phone: number;
+  birthDate: {};
   street: string;
   zipCode: number;
   city: string;
@@ -19,7 +20,8 @@ export class Customer {
     this.firstName = obj ? obj.firstName : '';
     this.lastName = obj ? obj.lastName : '';
     this.email = obj ? obj.email : '';
-    this.birthDate = obj ? obj.birthDate : '';
+    this.phone = obj ? obj.phone : null;
+    this.birthDate = obj ? obj.birthDate : {};
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';

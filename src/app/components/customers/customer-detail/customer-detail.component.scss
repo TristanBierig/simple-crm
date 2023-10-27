@@ -25,6 +25,12 @@
         justify-content: center;
     }
 
+    mat-card-subtitle {
+        a {
+            color: var(--mat-card-subtitle-text-color)
+        }
+    }
+
     mat-divider {
         margin: 16px 0;
     }
