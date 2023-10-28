@@ -187,6 +187,7 @@ export class FirestoreService {
       completeInfo: obj.completeInfo,
       displayName: obj.displayName,
       role: obj.role,
+      todos: obj.todos,
     };
   }
 
@@ -227,6 +228,7 @@ export class FirestoreService {
         completeInfo: data.completeInfo,
         displayName: data.displayName,
         role: data.role,
+        todos: data.todos,
       };
     }
   }

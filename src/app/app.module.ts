@@ -26,7 +26,7 @@ import { DialogEditCustomerComponent } from './components/customers/dialog-edit-
 import { DialogEditCustomerPersonalComponent } from './components/customers/dialog-edit-customer-personal/dialog-edit-customer-personal.component';
 import { DialogEditCustomerProjectsComponent } from './components/customers/dialog-edit-customer-projects/dialog-edit-customer-projects.component';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -38,6 +38,7 @@ import { AccountEditDialogComponent } from './components/accounts/account-edit-d
 import { AccountEditEmailDialogComponent } from './components/accounts/account-edit-email-dialog/account-edit-email-dialog.component';
 import { AccountEditPhoneDialogComponent } from './components/accounts/account-edit-phone-dialog/account-edit-phone-dialog.component';
 import { NgChartsModule } from 'ng2-charts';
+import { AddTodoDialogComponent } from './components/dashboard/add-todo-dialog/add-todo-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NgChartsModule } from 'ng2-charts';
     AccountEditDialogComponent,
     AccountEditEmailDialogComponent,
     AccountEditPhoneDialogComponent,
+    AddTodoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,9 +73,7 @@ import { NgChartsModule } from 'ng2-charts';
     provideStorage(() => getStorage()),
     NgChartsModule,
   ],
-  providers: [
-    {provide: LOCALE_ID, useValue: 'de-DE' }
-  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
