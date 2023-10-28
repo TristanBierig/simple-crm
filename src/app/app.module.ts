@@ -37,6 +37,7 @@ import { AccountComponent } from './components/accounts/account/account.componen
 import { AccountEditDialogComponent } from './components/accounts/account-edit-dialog/account-edit-dialog.component';
 import { AccountEditEmailDialogComponent } from './components/accounts/account-edit-email-dialog/account-edit-email-dialog.component';
 import { AccountEditPhoneDialogComponent } from './components/accounts/account-edit-phone-dialog/account-edit-phone-dialog.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { AccountEditPhoneDialogComponent } from './components/accounts/account-e
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    NgChartsModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'de-DE' }
