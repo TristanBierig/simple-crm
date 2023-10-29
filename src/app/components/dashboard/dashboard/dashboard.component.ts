@@ -6,7 +6,7 @@ import { AuthenticationService } from 'src/app/services/firebase/authentication.
 import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTodoDialogComponent } from '../add-todo-dialog/add-todo-dialog.component';
-import { Customer } from 'src/app/models/customer.class';
+
 
 @Component({
   selector: 'app-dashboard',

@@ -1,3 +1,13 @@
 .dialog-name-input-wrapper {
     padding-top: 8px;
 }
+
+.dialog__row-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    mat-form-field {
+        width: 50%;
+    }
+}
