@@ -100,7 +100,9 @@
 
     <mat-divider></mat-divider>
   </mat-card-content>
-  <mat-card-actions></mat-card-actions>
+  <mat-card-actions>
+    <button (click)="guestLogin()" mat-raised-button color="accent">Login as a Guest</button>
+  </mat-card-actions>
   <mat-card-footer>
     <mat-progress-bar
       *ngIf="isLoading"

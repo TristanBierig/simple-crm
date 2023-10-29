@@ -14,19 +14,20 @@
         *ngFor="let todo of currentUser.todos; index as i"
         class="todo__card"
       >
-        <button
-          (click)="deleteTodo(i)"
-          class="pin-top-right small-icon-button"
-          mat-icon-button
-          aria-label="Icon button to delete this single todo"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-
         <mat-card-header>
           <mat-card-subtitle>{{ todo.title }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>{{ todo.content }}</mat-card-content>
+        <mat-card-actions>
+          <button
+            (click)="deleteTodo(i)"
+            class="small-icon-button"
+            mat-icon-button
+            aria-label="Icon button to delete this single todo"
+          >
+            <mat-icon>delete_outlined</mat-icon>
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </mat-card-content>
