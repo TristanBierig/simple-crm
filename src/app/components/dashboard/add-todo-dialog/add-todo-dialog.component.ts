@@ -24,8 +24,9 @@ export class AddTodoDialogComponent {
   saveTodo() {
     if (this.todo) {
       this.currentUser.todos.push(this.todo);
+      this.fireService.updateDoc(this.currentUser, this.currentUser.id)
     }
-    this.closeDialog();
+    this.closeDialog();    
   }
 
   closeDialog() {

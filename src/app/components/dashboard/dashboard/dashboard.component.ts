@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/services/firebase/authentication.
 import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTodoDialogComponent } from '../add-todo-dialog/add-todo-dialog.component';
+import { Customer } from 'src/app/models/customer.class';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,20 +20,20 @@ export class DashboardComponent implements OnInit {
   public barChartType: ChartType = 'bar';
 
   public barChartData: ChartData<'bar'> = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
+    labels: ['2023',],
     datasets: [
       {
-        data: [651, 59, 280, 81, 56, 55, 40],
+        data: [],
         label: 'success',
         backgroundColor: '#009788',
       },
       {
-        data: [28, 48, 401, 19, 86, 27, 90],
+        data: [],
         label: 'pending',
         backgroundColor: '#a376cb',
       },
       {
-        data: [28, 48, 40, 19, 86, 27, 94],
+        data: [],
         label: 'lost',
         backgroundColor: '#f5393b',
       },
@@ -41,18 +42,28 @@ export class DashboardComponent implements OnInit {
 
   currentUserId!: string;
   currentUser!: Employee;
+
+  leadSuccess: number[] = [];
+  leadPending: number[] = [];
+  leadLost: number[] = [];
+
+  leadSuccessSum!: number;
+  leadPendingSum!: number;
+  leadLostSum!: number;
+
   private componentIsDestroyed$ = new Subject<boolean>();
 
   constructor(
     private authService: AuthenticationService,
     private fireService: FirestoreService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.setChartData();
+  }
 
   ngOnInit() {
     this.currentUserId = this.authService.currentUserId;
     this.setCurrentUser();
-    this.setChartData();
   }
 
   setCurrentUser() {
@@ -64,10 +75,46 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  setChartData() {}
+  setChartData() {
+    this.fireService.customers$
+      .pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe((customers) => {
+        customers.forEach((customer) => {
+          switch (customer.leadInfo.leadStatus) {
+            case 'success':
+              this.leadSuccess.push(customer.leadInfo.leadValue);
+              break;
+            case 'pending':
+              this.leadPending.push(customer.leadInfo.leadValue);
+              break;
+            case 'lost':
+              this.leadLost.push(customer.leadInfo.leadValue);
+              break;
+
+            default:
+              break;
+          }
+        });
+        this.sumSingleLeads();
+      });
+  }
+
+  sumSingleLeads() {
+    this.leadSuccessSum = this.leadSuccess.reduce((a, b) => a + b, 0);
+    this.leadPendingSum = this.leadPending.reduce((a, b) => a + b, 0);
+    this.leadLostSum = this.leadLost.reduce((a, b) => a + b, 0);
+    this.setSingleNumbersForChartData();
+  }
+
+  setSingleNumbersForChartData() {
+    this.barChartData.datasets[0].data.push(this.leadSuccessSum);
+    this.barChartData.datasets[1].data.push(this.leadPendingSum);
+    this.barChartData.datasets[2].data.push(this.leadLostSum);
+  }
 
   deleteTodo(i: number) {
     this.currentUser.todos.splice(i, 1);
+    this.fireService.updateDoc(this.currentUser, this.currentUserId);
   }
 
   ngOnDestroy() {

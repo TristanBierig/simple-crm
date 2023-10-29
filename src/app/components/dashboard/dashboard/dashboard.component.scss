@@ -16,7 +16,7 @@
 }
 
 .todo__card {
-    max-width: 25%;
+    max-width: 24%;
 
     .small-icon-button {
         width: 36px !important;
@@ -41,5 +41,16 @@
             width: 36px !important;
             height: 36px !important;
         }
+    }
+}
+
+.todo__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    
+    mat-card {
+        word-break: break-all;
+        word-wrap: break-word;
     }
 }
