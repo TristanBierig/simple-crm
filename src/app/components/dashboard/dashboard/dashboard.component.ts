@@ -16,6 +16,7 @@ import { AddTodoDialogComponent } from '../add-todo-dialog/add-todo-dialog.compo
 export class DashboardComponent implements OnInit {
   public barChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    maintainAspectRatio: false,
   };
   public barChartType: ChartType = 'bar';
 
@@ -131,7 +132,7 @@ export class DashboardComponent implements OnInit {
 
   greetings(): string {
     let now = new Date().getHours();
-    if (now < 12) {
+    if (now < 12 && now > 0) {
       return 'Good morning';
     } else if (now > 12 && now < 18) {
       return 'Good afternoon';

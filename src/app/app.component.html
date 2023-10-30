@@ -1,22 +1,43 @@
 <router-outlet *ngIf="!isLoggedIn" name="login"></router-outlet>
 
 <mat-drawer-container *ngIf="isLoggedIn" class="mat-sidenav-container" autosize>
-  <mat-drawer #drawer class="mat-sidenav" [opened]="true" mode="side">
+  <mat-drawer
+    #drawer
+    class="mat-sidenav"
+    [opened]="isDesktop ? true : false"
+    mode="side"
+  >
     <div class="logo-container">
       <img src="../assets/images/logo.png" alt="" />
     </div>
 
     <ul class="sidenav-list">
-      <li routerLink="/dashboard" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/dashboard"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>dashboard</mat-icon>Dashboard
       </li>
-      <li routerLink="/customers" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/customers"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>groups</mat-icon>Customers
       </li>
-      <li routerLink="/staff" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/staff"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>engineering</mat-icon>Staff
       </li>
-      <li routerLink="/account" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/account"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>settings</mat-icon>Account
         <mat-icon
           *ngIf="!isAccountInfoComplete"

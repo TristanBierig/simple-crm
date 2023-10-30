@@ -61,9 +61,20 @@
 .user-detail-second-row {
     display: flex;
     gap: 16px;
+
 }
 
 .lead__row-wrapper {
     display: flex;
     justify-content: space-around;
+}
+
+@media only screen and (max-width: 1020px) {
+    .user-detail-card {
+        width: 100%;
+    }
+
+    .user-detail-second-row {
+        flex-direction: column;
+    }
 }

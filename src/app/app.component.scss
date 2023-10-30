@@ -54,5 +54,9 @@
 }
 
 .router-container {
-    padding: 16px 60px;
+    padding: 16px 32px;
+
+    @media only screen and (max-width: 599.98px) {
+        padding: 16px 4px;
+    }
 }

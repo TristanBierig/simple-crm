@@ -18,6 +18,10 @@
 .todo__card {
     max-width: 24%;
 
+    @media only screen and (max-width: 1020px) {
+        max-width: 100%;
+    }
+
     .small-icon-button {
         width: 36px !important;
         height: 36px !important;
@@ -48,9 +52,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    
+
     mat-card {
         word-break: break-all;
         word-wrap: break-word;
     }
+}
+
+.dashboard__chart-card {
+   height: 450px;
 }

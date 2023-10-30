@@ -7,6 +7,7 @@ import { DialogEditCustomerPersonalComponent } from '../dialog-edit-customer-per
 import { DialogEditCustomerProjectsComponent } from '../dialog-edit-customer-projects/dialog-edit-customer-projects.component';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { ResponsiveService } from 'src/app/services/responsive.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -14,6 +15,9 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./customer-detail.component.scss'],
 })
 export class CustomerDetailComponent implements OnInit {
+  isMobile!: boolean;
+  isTablet!: boolean;
+  isDesktop!: boolean;
   customerDetail!: Customer;
   customerId!: string;
 
@@ -21,11 +25,13 @@ export class CustomerDetailComponent implements OnInit {
 
   constructor(
     private fireService: FirestoreService,
+    private ResponsiveService: ResponsiveService,
     private route: ActivatedRoute,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
+    this.listenForResponsive();
     this.cacheCustomerId();
     this.fireService.startSubSingle(this.customerId);
     this.fireService.singleCustomer$
@@ -39,6 +45,20 @@ export class CustomerDetailComponent implements OnInit {
     this.fireService.unsubSingleCustomer();
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();
+  }
+
+  listenForResponsive() {
+    this.ResponsiveService.isMobile$.subscribe((isMobile) => {
+      this.isMobile = isMobile;
+    });
+
+    this.ResponsiveService.isTablet$.subscribe((isTablet) => {
+      this.isTablet = isTablet;
+    });
+
+    this.ResponsiveService.isDesktop$.subscribe((isDesktop) => {
+      this.isDesktop = isDesktop;
+    });
   }
 
   cacheCustomerId() {
@@ -64,7 +84,7 @@ export class CustomerDetailComponent implements OnInit {
     });
   }
 
-  openProjectsEdit() {
+  openLeadEdit() {
     this.dialog.open(DialogEditCustomerProjectsComponent, {
       data: { content: this.customerDetail, docRef: this.customerId },
     });

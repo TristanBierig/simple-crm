@@ -103,3 +103,19 @@ mat-card {
         }
     }
 }
+
+@media only screen and (max-width: 599.98px) {
+    .logo {
+        top: 16px;
+        left: 16px;
+        
+        img {
+            height: 60px;
+        }
+    }
+
+    .login__card {
+        width: 95%;
+        z-index: 2;
+    }
+}
