@@ -74,7 +74,7 @@ input:-webkit-autofill:active {
 }
 
 .pin-top-right {
-    position: absolute;
+    position: absolute !important;
     right: 8px;
     top: 8px;
 }

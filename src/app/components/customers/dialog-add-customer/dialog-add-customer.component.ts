@@ -28,6 +28,7 @@ export class DialogAddCustomerComponent {
       firstName: this.customer.firstName || '',
       lastName: this.customer.lastName || '',
       email: this.customer.email || '',
+      phone: this.customer.phone,
       birthDate: this.birthDate.toLocaleString('de-DE', {
         weekday: undefined,
         year: 'numeric',
@@ -37,15 +38,18 @@ export class DialogAddCustomerComponent {
       street: this.customer.street || '',
       zipCode: this.customer.zipCode,
       city: this.customer.city || '',
-      leadOwner: this.employee.displayName || '',
-      leadStartDate:
-        new Date().toLocaleString('de-DE', {
+      leadInfo: {
+        leadOwner: this.employee.displayName || '',
+        leadStartDate: new Date().toLocaleString('de-DE', {
           weekday: undefined,
           year: 'numeric',
           month: 'long',
           day: 'numeric',
         }) || '',
-      leadStatus: 'pending' || '',
+        leadStatus: 'pending' || '',
+        leadValue: this.customer.leadInfo.leadValue,
+        leadTitle: this.customer.leadInfo.leadTitle,
+      },
     };
     await this.fireService.addCustomer(customer);
     this.loading = false;

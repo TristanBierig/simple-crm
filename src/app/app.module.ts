@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDE from '@angular/common/locales/de';
+registerLocaleData(localeDE, 'de');
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +26,7 @@ import { DialogEditCustomerComponent } from './components/customers/dialog-edit-
 import { DialogEditCustomerPersonalComponent } from './components/customers/dialog-edit-customer-personal/dialog-edit-customer-personal.component';
 import { DialogEditCustomerProjectsComponent } from './components/customers/dialog-edit-customer-projects/dialog-edit-customer-projects.component';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard/dashboard.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -33,6 +37,8 @@ import { AccountComponent } from './components/accounts/account/account.componen
 import { AccountEditDialogComponent } from './components/accounts/account-edit-dialog/account-edit-dialog.component';
 import { AccountEditEmailDialogComponent } from './components/accounts/account-edit-email-dialog/account-edit-email-dialog.component';
 import { AccountEditPhoneDialogComponent } from './components/accounts/account-edit-phone-dialog/account-edit-phone-dialog.component';
+import { NgChartsModule } from 'ng2-charts';
+import { AddTodoDialogComponent } from './components/dashboard/add-todo-dialog/add-todo-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +57,7 @@ import { AccountEditPhoneDialogComponent } from './components/accounts/account-e
     AccountEditDialogComponent,
     AccountEditEmailDialogComponent,
     AccountEditPhoneDialogComponent,
+    AddTodoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,8 +71,9 @@ import { AccountEditPhoneDialogComponent } from './components/accounts/account-e
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    NgChartsModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

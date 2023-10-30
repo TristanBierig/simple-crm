@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Add a new To-Do</h1>
+<div mat-dialog-content>
+  <p>Write down your thoughts</p>
+  <div class="todo__input-wrapper">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="todo.title" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Content</mat-label>
+      <input matInput [(ngModel)]="todo.content" />
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-button (click)="saveTodo()" cdkFocusInitial>Ok</button>
+</div>

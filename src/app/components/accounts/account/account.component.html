@@ -53,13 +53,13 @@
   <mat-card-header>
     <mat-card-title>Email address</mat-card-title>
     <mat-card-subtitle
-      >Here you can save all emails you are using and want to be contacted
+      >Here you can save the email you are using and want to be contacted
       by</mat-card-subtitle
     >
   </mat-card-header>
   <mat-card-content>
     <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
-      <mat-icon color="primary">mail</mat-icon>
+      <mat-icon fontSet="material-icons-outlined" color="primary">mail</mat-icon>
       <span>{{ currentUser.email }}</span>
     </div>
     <div class="pin-top-right">
@@ -75,12 +75,12 @@
   <mat-card-header>
     <mat-card-title>Phone number</mat-card-title>
     <mat-card-subtitle
-      >Save all your phone numbers you can be reached by</mat-card-subtitle
+      >Save your phone number to stay in contact with your colleagues</mat-card-subtitle
     >
   </mat-card-header>
   <mat-card-content>
     <div *ngIf="currentUser" class="mt-16 profile-email-wrapper">
-      <mat-icon color="primary">call</mat-icon>
+      <mat-icon fontSet="material-icons-outlined" color="primary">call</mat-icon>
       <span>{{ currentUser.phone }}</span>
     </div>
     <div class="pin-top-right">

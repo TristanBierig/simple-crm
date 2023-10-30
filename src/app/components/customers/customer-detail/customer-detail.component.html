@@ -12,17 +12,14 @@
         Back to list
       </button>
       <button
+        color="accent"
+        (click)="openMainEdit()"
         mat-icon-button
-        [matMenuTriggerFor]="editMenuTop"
-        aria-label="Icon button with a vertical three dot icon"
+        aria-label="Icon button with a pen to edit core data"
       >
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon>edit</mat-icon>
       </button>
     </div>
-
-    <mat-menu #editMenuTop="matMenu">
-      <button (click)="openMainEdit()" mat-menu-item>Edit</button>
-    </mat-menu>
 
     <div mat-card-avatar class="user-detail-header-image mr-16"></div>
     <div class="user-detail-title-wrapper">
@@ -30,7 +27,16 @@
         >{{ customerDetail.firstName }}
         {{ customerDetail.lastName }}
       </mat-card-title>
-      <mat-card-subtitle *ngIf="customerDetail">{{ customerDetail.email }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="customerDetail">
+        <a href="mailto:{{ customerDetail.email }}">{{
+          customerDetail.email
+        }}</a>
+      </mat-card-subtitle>
+      <mat-card-subtitle *ngIf="customerDetail">
+        <a href="tel:{{ customerDetail.phone }}">{{
+          customerDetail.phone
+        }}</a>
+      </mat-card-subtitle>
     </div>
   </mat-card-header>
 </mat-card>
@@ -38,62 +44,100 @@
 <div class="user-detail-second-row">
   <mat-card class="user-detail-card">
     <button
+      (click)="openPersonalEdit()"
+      color="accent"
       class="pin-top-right"
       mat-icon-button
-      [matMenuTriggerFor]="editMenuPersonal"
-      aria-label="Icon button with a vertical three dot icon"
+      aria-label="Icon button with a pen to edit personal data"
     >
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon>edit</mat-icon>
     </button>
-    <mat-menu #editMenuPersonal="matMenu">
-      <button (click)="openPersonalEdit()" mat-menu-item>Edit</button>
-    </mat-menu>
 
     <mat-card-header class="center-text">
       <mat-card-title> Personal data </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <div>
-        <mat-card-subtitle>Address</mat-card-subtitle>
-        <span *ngIf="customerDetail">{{ customerDetail.street }}</span>
-        <br />
-        <span *ngIf="customerDetail">{{ customerDetail.zipCode }} {{ customerDetail.city }}</span>
-      </div>
-      <div>
-        <mat-card-subtitle>Birthday</mat-card-subtitle>
-        <span *ngIf="customerDetail">{{ customerDetail.birthDate }}</span>
+      <div class="lead__row-wrapper">
+        <div>
+          <mat-card-subtitle>Address</mat-card-subtitle>
+          <span *ngIf="customerDetail">{{ customerDetail.street }}</span>
+          <br />
+          <span *ngIf="customerDetail"
+            >{{ customerDetail.zipCode }} {{ customerDetail.city }}</span
+          >
+        </div>
+        <div>
+          <mat-card-subtitle>Birthday</mat-card-subtitle>
+          <span *ngIf="customerDetail">{{ customerDetail.birthDate }}</span>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
 
   <mat-card class="user-detail-card">
     <button
+      (click)="openProjectsEdit()"
+      color="accent"
       class="pin-top-right"
       mat-icon-button
-      [matMenuTriggerFor]="editMenuProjects"
-      aria-label="Icon button with a vertical three dot icon"
+      aria-label="Icon button with a pen to edit lead data"
     >
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon>edit</mat-icon>
     </button>
-    <mat-menu #editMenuProjects="matMenu">
-      <button (click)="openProjectsEdit()" mat-menu-item>Edit</button>
-    </mat-menu>
 
     <mat-card-header class="center-text">
-      <mat-card-title> Projects </mat-card-title>
+      <mat-card-title> Lead Info </mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
       <div>
-        <mat-card-subtitle>Assignments</mat-card-subtitle>
-        <span>Project-X v2.3</span>
+        <mat-card-subtitle>Title</mat-card-subtitle>
+        <span *ngIf="customerDetail">{{
+          customerDetail.leadInfo.leadTitle
+        }}</span>
       </div>
-      <div>
-        <mat-card-subtitle>Role</mat-card-subtitle>
-        <mat-chip-listbox>
-          <mat-chip highlighted color="accent"> Marketing </mat-chip>
-        </mat-chip-listbox>
+
+      <div class="lead__row-wrapper">
+        <div>
+          <mat-card-subtitle>Owner</mat-card-subtitle>
+          <span *ngIf="customerDetail">{{
+            customerDetail.leadInfo.leadOwner
+          }}</span>
+        </div>
+        <div>
+          <mat-card-subtitle>Startdate</mat-card-subtitle>
+          <span *ngIf="customerDetail">{{
+            customerDetail.leadInfo.leadStartDate
+          }}</span>
+        </div>
+      </div>
+
+      <div class="lead__row-wrapper">
+        <div>
+          <mat-card-subtitle>Value</mat-card-subtitle>
+          <span *ngIf="customerDetail"
+            >{{ customerDetail.leadInfo.leadValue | currency : "EUR" }}
+          </span>
+        </div>
+        <div>
+          <mat-card-subtitle>Status</mat-card-subtitle>
+          <mat-chip-listbox>
+            <mat-chip
+              *ngIf="customerDetail"
+              highlighted
+              [color]="
+                customerDetail.leadInfo.leadStatus == 'lost'
+                  ? 'warn'
+                  : customerDetail.leadInfo.leadStatus == 'success'
+                  ? 'primary'
+                  : 'accent'
+              "
+            >
+              {{ customerDetail.leadInfo.leadStatus }}
+            </mat-chip>
+          </mat-chip-listbox>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>

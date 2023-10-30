@@ -1,0 +1,56 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dashboard__personal-card {
+
+    mat-card-header {
+        margin-bottom: 16px;
+    }
+
+    mat-divider {
+        margin-bottom: 8px;
+    }
+}
+
+.todo__card {
+    max-width: 24%;
+
+    .small-icon-button {
+        width: 36px !important;
+        height: 36px !important;
+        padding: 0px !important;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+
+        &>*[role=img] {
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .mat-mdc-button-touch-target {
+            width: 36px !important;
+            height: 36px !important;
+        }
+    }
+}
+
+.todo__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    
+    mat-card {
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+}

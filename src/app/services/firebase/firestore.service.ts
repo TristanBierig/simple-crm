@@ -154,13 +154,18 @@ export class FirestoreService {
       firstName: obj.firstName || '',
       lastName: obj.lastName || '',
       email: obj.email || '',
+      phone: obj.phone || 0,
       birthDate: obj.birthDate || '',
       street: obj.street || '',
       zipCode: obj.zipCode || 0,
       city: obj.city || '',
-      leadOwner: obj.leadOwner || '',
-      leadStartDate: obj.leadStartDate || '',
-      leadStatus: obj.leadStatus || '',
+      leadInfo: {
+        leadOwner: obj.leadInfo.leadOwner || '',
+        leadStartDate: obj.leadInfo.leadStartDate || '',
+        leadStatus: obj.leadInfo.leadStatus || '',
+        leadValue: obj.leadInfo.leadValue || '',
+        leadTitle: obj.leadInfo.leadTitle || '',
+      }
     };
   }
 
@@ -182,6 +187,7 @@ export class FirestoreService {
       completeInfo: obj.completeInfo,
       displayName: obj.displayName,
       role: obj.role,
+      todos: obj.todos,
     };
   }
 
@@ -191,13 +197,18 @@ export class FirestoreService {
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
+        phone: data.phone,
         birthDate: data.birthDate,
         street: data.street,
         zipCode: data.zipCode,
         city: data.city,
-        leadOwner: data.leadOwner,
-        leadStartDate: data.leadStartDate,
-        leadStatus: data.leadStatus,
+        leadInfo: {
+          leadOwner: data.leadInfo.leadOwner,
+          leadTitle: data.leadInfo.leadTitle,
+          leadStartDate: data.leadInfo.leadStartDate,
+          leadStatus: data.leadInfo.leadStatus,
+          leadValue: data.leadInfo.leadValue,
+        }
       };
     } else {
       return {
@@ -217,6 +228,7 @@ export class FirestoreService {
         completeInfo: data.completeInfo,
         displayName: data.displayName,
         role: data.role,
+        todos: data.todos,
       };
     }
   }

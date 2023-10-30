@@ -1,28 +1,21 @@
-<h1 mat-dialog-title>Edit core info</h1>
-<div mat-dialog-content>
-  <div class="dialog-name-input-wrapper pt-8">
-    <mat-form-field>
-      <mat-label>Assigned project</mat-label>
-      <mat-select [(value)]="assignment">
-        <mat-option>none</mat-option>
-        <mat-option [value]="project.value" *ngFor="let project of projects">{{
-          project.viewValue
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+<mat-card-header>
+  <mat-card-title mat-dialog-title>Edit lead info</mat-card-title>
+</mat-card-header>
 
-  <div>
-    <mat-form-field>
-      <mat-label>Project Role</mat-label>
-      <mat-select [(value)]="role">
-        <mat-option>none</mat-option>
-        <mat-option [value]="role.value" *ngFor="let role of roles">{{
-          role.viewValue
+<div class="input__wrapper" mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input [(ngModel)]="customer.leadInfo.leadTitle" matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="customer.leadInfo.leadStatus">
+        <mat-option *ngFor="let element of status" [value]="element.value">{{
+          element.viewValue
         }}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
 </div>
 
 <div mat-dialog-actions>

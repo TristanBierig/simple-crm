@@ -3,25 +3,34 @@ export class Customer {
   firstName: string;
   lastName: string;
   email: string;
-  birthDate: string;
+  phone: number;
+  birthDate: {};
   street: string;
   zipCode: number;
   city: string;
-  leadStatus: 'lost' | 'pending' | 'fullfilled';
-  leadOwner: string;
-  leadStartDate: string;
-
+  leadInfo: {
+    leadStatus: 'lost' | 'pending' | 'success';
+    leadOwner: string;
+    leadValue: number;
+    leadStartDate: string;
+    leadTitle: string;
+  };
   constructor(obj?: any) {
     this.id = obj ? obj.id : '';
     this.firstName = obj ? obj.firstName : '';
     this.lastName = obj ? obj.lastName : '';
     this.email = obj ? obj.email : '';
-    this.birthDate = obj ? obj.birthDate : '';
+    this.phone = obj ? obj.phone : null;
+    this.birthDate = obj ? obj.birthDate : {};
     this.street = obj ? obj.street : '';
     this.zipCode = obj ? obj.zipCode : '';
     this.city = obj ? obj.city : '';
-    this.leadStatus = obj ? obj.leadStatus : '';
-    this.leadOwner = obj ? obj.leadOwner : '';
-    this.leadStartDate = obj ? obj.leadStartDate : '';
+    this.leadInfo = {
+      leadStatus: obj ? obj.leadInfo.leadStatus : '',
+      leadOwner: obj ? obj.leadInfo.leadOwner : '',
+      leadStartDate: obj ? obj.leadInfo.leadStartDate : '',
+      leadValue: obj ? obj.leadInfo.leadValue : null,
+      leadTitle: obj ? obj.leadInfo.leadTitle : '',
+    };
   }
 }

@@ -1,0 +1,54 @@
+<mat-card class="dashboard__personal-card">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title *ngIf="currentUser"
+        >{{ greetings() }} {{ currentUser.displayName }}!</mat-card-title
+      >
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content *ngIf="currentUser">
+    <mat-card-subtitle>View your current To-Do's</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <div class="todo__wrapper">
+      <mat-card
+        *ngFor="let todo of currentUser.todos; index as i"
+        class="todo__card"
+      >
+        <mat-card-header>
+          <mat-card-subtitle>{{ todo.title }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>{{ todo.content }}</mat-card-content>
+        <mat-card-actions>
+          <button
+            (click)="deleteTodo(i)"
+            class="small-icon-button"
+            mat-icon-button
+            aria-label="Icon button to delete this single todo"
+          >
+            <mat-icon>delete_outlined</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="openDialog()" mat-stroked-button color="accent">
+      <mat-icon>add</mat-icon>add To-Do
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="dashboard__chart-card">
+  <mat-card-header>
+    <mat-card-title>Company leads</mat-card-title>
+  </mat-card-header>
+  <mat-card-content
+    ><canvas
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [type]="barChartType"
+    >
+    </canvas
+  ></mat-card-content>
+</mat-card>

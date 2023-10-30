@@ -56,6 +56,29 @@ export class LoginComponent {
     }, 1000);
   }
 
+  guestLogin() {
+    this.isLoading = true;
+    // Timeout just to have time for the loading animation to run
+    setTimeout(() => {
+      this.authService
+        .signIn({
+          email: 'guest@user.com',
+          password: '123456',
+        })
+        .subscribe({
+          error: () => {
+            const errorMsg =
+              'There was an error with your E-Mail/Password combination. Please try again.';
+            this.isLoading = false;
+            this.snackBar.open(errorMsg, 'OK', { duration: 5000 });
+          },
+          complete: () => {
+            this.router.navigate(['dashboard']);
+          },
+        });
+    }, 1000);
+  }
+
   recoverPassword() {
     this.isRecoveringPassword = true;
     this.authService.recoverPassword(this.loginForm.value.email!).subscribe({

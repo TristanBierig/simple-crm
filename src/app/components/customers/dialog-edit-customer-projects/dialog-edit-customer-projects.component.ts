@@ -11,21 +11,11 @@ import { FirestoreService } from 'src/app/services/firebase/firestore.service';
 export class DialogEditCustomerProjectsComponent {
   customer: Customer;
   customerId: string;
-
   loading: boolean = false;
-
-  assignment!: string;
-  projects: any[] = [
-    { value: 'daWebsite-0', viewValue: 'DA-Website v3.0' },
-    { value: 'projectX-1', viewValue: 'Project-X v1.2' },
-    { value: 'backoffice-2', viewValue: "Start-up's Backoffice" },
-  ];
-
-  role!: string;
-  roles: any[] = [
-    { value: 'marketing-0', viewValue: 'Marketing' },
-    { value: 'frontend-1', viewValue: 'Frontend Developer' },
-    { value: 'backend-2', viewValue: 'Backend Developer' },
+  status: any[] = [
+    { value: 'lost', viewValue: 'lost' },
+    { value: 'pending', viewValue: 'pending' },
+    { value: 'success', viewValue: 'success' },
   ];
 
   constructor(
@@ -38,7 +28,7 @@ export class DialogEditCustomerProjectsComponent {
   }
 
   updateInfo() {
-    this.fireService.updateDoc(this.customer, this.customer.id!);
+    this.fireService.updateDoc(this.customer, this.customerId);
     this.closeDialog();
   }
 

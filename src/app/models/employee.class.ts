@@ -15,6 +15,7 @@ export class Employee {
   completeInfo: boolean;
   displayName: string;
   role: string;
+  todos: { title: string; content: string }[];
 
   constructor(auth?: any, info?: any) {
     this.id = auth ? auth.uid : '';
@@ -32,6 +33,7 @@ export class Employee {
     this.displayName = info ? info.firstName : '';
     this.completeInfo = false;
     this.role = '';
+    this.todos = [];
     this.setTimezone();
   }
 

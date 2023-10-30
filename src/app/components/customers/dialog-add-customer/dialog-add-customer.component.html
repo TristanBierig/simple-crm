@@ -1,7 +1,7 @@
-<h1 mat-dialog-title>Add Customer</h1>
+<h2 mat-dialog-title>Add Customer</h2>
 <div mat-dialog-content>
-  <div class="dialog-name-input-wrapper">
-    <mat-form-field class="mr-16" appearance="outline">
+  <div class="dialog-name-input-wrapper dialog__row-wrapper">
+    <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
       <input [disabled]="loading" [(ngModel)]="customer.firstName" matInput />
     </mat-form-field>
@@ -15,6 +15,13 @@
     <mat-form-field class="full-width" appearance="outline">
       <mat-label>Email</mat-label>
       <input [(ngModel)]="customer.email" matInput />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input [(ngModel)]="customer.phone" matInput />
     </mat-form-field>
   </div>
   
@@ -37,14 +44,27 @@
     </mat-form-field>
   </div>
 
-  <div>
-    <mat-form-field class="mr-16" appearance="outline">
+  <div class="dialog__row-wrapper">
+    <mat-form-field appearance="outline">
       <mat-label>Zip code</mat-label>
       <input [(ngModel)]="customer.zipCode" matInput />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>City</mat-label>
       <input [(ngModel)]="customer.city" matInput />
+    </mat-form-field>
+  </div>
+
+  <h2>Lead info</h2>
+  <div class="dialog__row-wrapper">
+    <mat-form-field appearance="outline">
+      <mat-label>Lead title</mat-label>
+      <input [(ngModel)]="customer.leadInfo.leadTitle" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Lead value</mat-label>
+      <input [(ngModel)]="customer.leadInfo.leadValue" type="number" matInput>
+      <mat-icon matSuffix>euro</mat-icon>
     </mat-form-field>
   </div>
 </div>
