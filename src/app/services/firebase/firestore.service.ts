@@ -59,14 +59,9 @@ export class FirestoreService {
       .catch((err) => {
         console.error(err);
       })
-      .then((docRef) => {
-        console.log('Document created with ID: ', docRef?.id);
-      });
   }
 
   async setDoc(uid: string, employee: Employee) {
-    console.log(this.getCleanJson(employee));
-
     await setDoc(doc(this.getEmployeesRef(), uid), this.getCleanJson(employee));
   }
 
@@ -123,7 +118,6 @@ export class FirestoreService {
   subSingleCustomer(docId: string) {
     return onSnapshot(this.getSingleDocRef('customers', docId), (customer) => {
       this.singleCustomer = customer.data();
-      console.log(this.singleCustomer);
       this.singleCustomerSubject.next(this.singleCustomer);
     });
   }
@@ -131,7 +125,6 @@ export class FirestoreService {
   subSingleEmployee(docId: string) {
     return onSnapshot(this.getSingleDocRef('employees', docId), (employee) => {
       this.singleEmployee = employee.data();
-      console.log('Snapshot from Service for data: ', this.singleEmployee);
       this.singleEmployeeSubject.next(this.singleEmployee);
     });
   }

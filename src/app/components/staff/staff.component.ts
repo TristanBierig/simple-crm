@@ -19,7 +19,6 @@ export class StaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEmployeeList();
-    console.log(this.employeeList);
   }
 
   loadEmployeeList() {

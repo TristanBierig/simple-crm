@@ -30,10 +30,8 @@ export class AuthenticationService implements OnInit {
         const uid = user.uid;
         this.currentUserId = uid;
         this.fireService.startSubSingleEmployee(this.currentUserId);
-        console.log('Logged in as: ', user);
       } else {
         // User is signed out
-        console.log('Logged out user: ', user);
       }
     });
   }
@@ -74,7 +72,6 @@ export class AuthenticationService implements OnInit {
   recoverPassword(email: string): Observable<void> {
     return from(
       sendPasswordResetEmail(this.auth, email).then(() => {
-        console.log('reset emnail has been send');
       })
     );
   }

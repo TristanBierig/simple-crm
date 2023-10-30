@@ -48,7 +48,6 @@ export class CustomerComponent implements AfterViewInit {
       .subscribe((customers) => {
         this.dataSource.data = customers;
         this.dataSource.sortingDataAccessor = this.pathDataAccessor;
-        console.log(this.dataSource);
       });
   }
 
