@@ -9,7 +9,7 @@
         color="accent"
       >
         <mat-icon>arrow_back</mat-icon>
-        Back to list
+        <span *ngIf="isDesktop">Back to list</span>
       </button>
       <button
         color="accent"
@@ -33,9 +33,7 @@
         }}</a>
       </mat-card-subtitle>
       <mat-card-subtitle *ngIf="customerDetail">
-        <a href="tel:{{ customerDetail.phone }}">{{
-          customerDetail.phone
-        }}</a>
+        <a href="tel:{{ customerDetail.phone }}">{{ customerDetail.phone }}</a>
       </mat-card-subtitle>
     </div>
   </mat-card-header>
@@ -44,6 +42,7 @@
 <div class="user-detail-second-row">
   <mat-card class="user-detail-card">
     <button
+      *ngIf="isDesktop"
       (click)="openPersonalEdit()"
       color="accent"
       class="pin-top-right"
@@ -73,10 +72,21 @@
         </div>
       </div>
     </mat-card-content>
+    <mat-card-actions *ngIf="!isDesktop" align="end">
+      <button
+        (click)="openPersonalEdit()"
+        color="accent"
+        mat-icon-button
+        aria-label="Icon button with a pen to edit personal data"
+      >
+        <mat-icon>edit</mat-icon>
+      </button></mat-card-actions
+    >
   </mat-card>
 
   <mat-card class="user-detail-card">
     <button
+      *ngIf="isDesktop"
       (click)="openProjectsEdit()"
       color="accent"
       class="pin-top-right"
@@ -140,5 +150,15 @@
         </div>
       </div>
     </mat-card-content>
+    <mat-card-actions *ngIf="!isDesktop" align="end">
+      <button
+        (click)="openPersonalEdit()"
+        color="accent"
+        mat-icon-button
+        aria-label="Icon button with a pen to edit personal data"
+      >
+        <mat-icon>edit</mat-icon>
+      </button></mat-card-actions
+    >
   </mat-card>
 </div>

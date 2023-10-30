@@ -7,16 +7,32 @@
     </div>
 
     <ul class="sidenav-list">
-      <li routerLink="/dashboard" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/dashboard"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>dashboard</mat-icon>Dashboard
       </li>
-      <li routerLink="/customers" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/customers"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>groups</mat-icon>Customers
       </li>
-      <li routerLink="/staff" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/staff"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>engineering</mat-icon>Staff
       </li>
-      <li routerLink="/account" routerLinkActive="sidenav-active-link">
+      <li
+        (click)="!isDesktop && drawer.toggle()"
+        routerLink="/account"
+        routerLinkActive="sidenav-active-link"
+      >
         <mat-icon>settings</mat-icon>Account
         <mat-icon
           *ngIf="!isAccountInfoComplete"
