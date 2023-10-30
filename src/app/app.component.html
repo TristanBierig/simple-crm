@@ -1,7 +1,12 @@
 <router-outlet *ngIf="!isLoggedIn" name="login"></router-outlet>
 
 <mat-drawer-container *ngIf="isLoggedIn" class="mat-sidenav-container" autosize>
-  <mat-drawer #drawer class="mat-sidenav" [opened]="true" mode="side">
+  <mat-drawer
+    #drawer
+    class="mat-sidenav"
+    [opened]="isDesktop ? true : false"
+    mode="side"
+  >
     <div class="logo-container">
       <img src="../assets/images/logo.png" alt="" />
     </div>

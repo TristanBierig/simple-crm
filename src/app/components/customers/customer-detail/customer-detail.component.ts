@@ -84,7 +84,7 @@ export class CustomerDetailComponent implements OnInit {
     });
   }
 
-  openProjectsEdit() {
+  openLeadEdit() {
     this.dialog.open(DialogEditCustomerProjectsComponent, {
       data: { content: this.customerDetail, docRef: this.customerId },
     });

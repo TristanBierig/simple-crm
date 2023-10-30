@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   isTablet!: boolean;
   isDesktop!: boolean;
   title = 'simple-crm';
-  isLoggedIn: boolean = true; // Should be false; For dev can switch
+  isLoggedIn: boolean = false; // Should be false; For dev can switch
   isAccountInfoComplete: boolean = false;
 
   constructor(
@@ -27,9 +27,9 @@ export class AppComponent implements OnInit {
     private ResponsiveService: ResponsiveService,
     private router: Router
   ) {
-    // this.authService.isLoggedIn$.subscribe((data) => {
-    //   this.isLoggedIn = data;
-    // });
+    this.authService.isLoggedIn$.subscribe((data) => {
+      this.isLoggedIn = data;
+    });
   }
 
   ngOnInit() {

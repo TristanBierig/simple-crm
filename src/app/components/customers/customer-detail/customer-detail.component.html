@@ -87,7 +87,7 @@
   <mat-card class="user-detail-card">
     <button
       *ngIf="isDesktop"
-      (click)="openProjectsEdit()"
+      (click)="openLeadEdit()"
       color="accent"
       class="pin-top-right"
       mat-icon-button
@@ -152,7 +152,7 @@
     </mat-card-content>
     <mat-card-actions *ngIf="!isDesktop" align="end">
       <button
-        (click)="openPersonalEdit()"
+        (click)="openLeadEdit()"
         color="accent"
         mat-icon-button
         aria-label="Icon button with a pen to edit personal data"
